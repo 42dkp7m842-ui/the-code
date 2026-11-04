@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#101317" />
   <meta name="description" content="THE CODE — 自分をつくる言葉を蓄積し、毎日見返すためのパーソナル・マニフェスト。" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="THE CODE" />
   <style>
 :root{--bg:#f4f3f0;--paper:#fff;--ink:#191e24;--muted:#81878e;--line:#e6e5e1;--side:#11151a;--side-2:#1c2229;--gold:#c8a46c;--gold2:#e3c69a;--radius:14px;--shadow:0 15px 40px rgba(14,24,32,.05)}
@@ -16,6 +16,81 @@
 @media(max-width:900px){.sidebar{width:256px;transform:translateX(-100%);transition:transform .25s}.sidebar.open{transform:translateX(0)}.sidebar-scrim.visible{display:block;position:fixed;inset:0;background:#0c1010a3;z-index:45}.app-body{margin-left:0;width:100%}.mobile-menu{display:block}.main-content{padding:26px 24px 45px}.topbar{padding:0 24px}.topbar-tag{font-size:9px}.site-footer{padding:21px 24px}.hero-quote{font-size:31px}.hero-aside{width:190px}.stats-grid{gap:10px}}
 @media(max-width:630px){.topbar{height:64px;padding:0 17px}.topbar-left{gap:10px}.topbar-tag,.topbar-line,.topbar-clock{display:none}.topbar-right{gap:13px}.streak-mini{font-size:8px}.top-add{padding:10px 12px;font-size:10px}.main-content{padding:22px 16px 42px}.page-heading{margin-bottom:20px}.page-heading h1{font-size:27px}.eyebrow{font-size:9px}.hero{min-height:350px;display:block}.hero-main{padding:28px 25px 25px;min-height:350px}.hero-aside{display:none}.hero-quote{font-size:27px;margin:auto 0;line-height:1.65}.hero:after{font-size:330px;bottom:-85px;right:-45px}.stats-grid{grid-template-columns:1fr 1fr;gap:9px}.stat-card{padding:15px 15px}.stat-top{font-size:9px}.stat-value{font-size:28px;margin:14px 0 5px}.stat-foot{font-size:9px}.content-split{grid-template-columns:1fr;gap:11px}.section-title{margin:28px 0 13px}.section-title h2{font-size:16px}.section-title .small-label{display:none}.section-toolbar{display:block}.section-toolbar .search-box{margin-top:12px}.card-grid{grid-template-columns:1fr;gap:10px}.quote-card{min-height:200px;padding:18px}.quote-body{font-size:17px;margin:15px 0 8px}.new-card{min-height:130px}.settings-grid{grid-template-columns:1fr}.focus-card{min-height:320px;padding:28px 25px}.focus-quote{font-size:26px}.reflect-panel{padding:19px}.reflect-actions{gap:8px}.review-choice{min-width:0;flex:1 1 calc(50% - 8px);padding:12px}.site-footer{padding:20px 17px;flex-wrap:wrap;justify-content:center;font-size:8px;text-align:center}.site-footer span:last-child{width:100%}.modal-overlay{padding:7px;align-items:center}.modal{max-height:96dvh}.modal-content{padding:20px}.modal-header{padding:18px 20px 16px}.modal-footer{padding:16px 20px}.field-row{grid-template-columns:1fr;gap:0}.section-toolbar .filter-pills{overflow-x:auto;flex-wrap:nowrap;padding-bottom:3px}.filter-pill{white-space:nowrap}.library-tools{gap:8px}.library-tools .search-box{min-width:0}.sort-select{max-width:145px;font-size:10px}.review-finished{padding:40px 22px}.review-teaser{min-height:210px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+  </style>
+  <style>
+/* THE CODE 1.2 — mobile PWA safe areas and new workflows */
+.mobile-brand{display:none}
+@media(max-width:900px){
+  .topbar{position:relative;z-index:20;box-sizing:content-box;padding-top:calc(env(safe-area-inset-top,0px) + 6px);min-height:64px;height:64px}
+  .sidebar-inner{padding-top:calc(29px + env(safe-area-inset-top,0px));padding-bottom:calc(19px + env(safe-area-inset-bottom,0px))}
+  .sidebar{height:100dvh;bottom:auto}
+  .modal-overlay{padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}
+  .modal{max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 16px)}
+}
+@media(max-width:630px){
+  .topbar{padding-left:16px;padding-right:16px;gap:10px}
+  .topbar-left,.topbar-right{min-width:0;gap:8px}
+  .topbar-right{margin-left:auto}
+  .topbar .mobile-menu{display:grid;place-items:center;min-width:44px;min-height:44px;padding:8px;position:relative;z-index:1}
+  .topbar .mobile-brand{display:block;font-family:Arial,sans-serif;font-size:14px;font-weight:900;white-space:nowrap;letter-spacing:1.2px;color:#12181e}
+  .streak-mini{display:none}
+  .topbar .top-add{white-space:nowrap;min-height:44px;display:flex;align-items:center;justify-content:center;padding:9px 12px;font-size:11px}
+  .topbar .top-add>span:first-child{font-size:19px}
+  .main-content{padding-top:27px}
+  .sidebar.open{box-shadow:20px 0 80px #0005}
+  .modal-overlay{align-items:flex-start}
+  .modal{margin:auto 0;max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 16px)}
+}
+@media(max-width:350px){.topbar .top-add{font-size:10px;padding:8px}.topbar .mobile-brand{font-size:12px;letter-spacing:0}.topbar{padding-left:8px;padding-right:8px}}
+.quick-access{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 4px}
+.quick-access button{border:1px solid #e3dfd7;border-radius:12px;background:#fff;text-align:left;padding:22px 23px;display:flex;flex-direction:column;gap:10px;color:#1f2529;box-shadow:0 9px 24px #00000007;transition:transform .2s,border-color .2s}
+.quick-access button:hover{border-color:#c8a46c;transform:translateY(-2px)}
+.quick-access button span{font-size:14px}.quick-access button small{font-size:11px;color:#888e91}
+.scene-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:22px 0 31px}
+.scene-choice{min-width:0;border:1px solid #e4e2dd;background:#fff;border-radius:11px;padding:18px 15px;display:flex;align-items:center;gap:12px;text-align:left;transition:.15s ease;cursor:pointer}
+.scene-choice:hover{border-color:#c8a46c}
+.scene-choice.selected{background:#1d242b;color:#fff;border-color:#1d242b;box-shadow:0 8px 20px #10151b24}
+.scene-symbol{flex:none;display:grid;place-items:center;font-size:23px;color:#b79a72;width:34px;height:34px}
+.scene-text{display:flex;flex-direction:column;gap:4px;min-width:0}
+.scene-text strong{font-size:12px;line-height:1.5}.scene-text small{font-size:10px;color:#92989d;line-height:1.5}.scene-choice.selected small{color:#b9c0c5}
+.scene-reco-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:30px 0 18px}
+.scene-reco-head h2{font-size:23px;margin:6px 0 7px}.scene-reco-head p:not(.eyebrow){color:#7f868b;font-size:12px;line-height:1.65;margin:0}
+.scene-reco-head button{white-space:nowrap}
+.scene-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.scene-result{background:#fff;border:1px solid #e9e7e2;border-radius:13px;min-height:278px;padding:25px 23px;display:flex;flex-direction:column;box-shadow:0 8px 25px #10151b08}
+.scene-result-number{font-family:Arial,sans-serif;color:#b39a76;font-size:10px;font-weight:850;letter-spacing:1.6px}
+.scene-result-quote{font-size:21px;font-weight:800;line-height:1.75;margin:25px 0 11px;overflow-wrap:anywhere}
+.scene-result-note{color:#7d858a;font-size:12px;line-height:1.75;margin:0 0 18px}
+.scene-result-foot{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid #efede8;padding-top:14px;margin-top:auto}
+.scene-result-foot span{font-size:10px;color:#93999e;overflow-wrap:anywhere}
+.scene-result-foot button{background:transparent;border:0;white-space:nowrap;font-size:11px;color:#a28157;font-weight:800}
+.scene-bottom{margin:26px 0 10px;display:flex;align-items:center;gap:18px}.scene-bottom p{font-size:11px;color:#91999e;line-height:1.6}
+.ai-importer{display:flex;flex-direction:column;gap:13px}.ai-step{display:flex;align-items:flex-start;gap:14px;margin-top:5px}
+.ai-step>span{display:grid;place-items:center;flex:none;border-radius:6px;background:#1e262d;color:#e6c99e;font-family:Arial,sans-serif;font-weight:850;font-size:11px;width:31px;height:31px}
+.ai-step h3{font-size:15px;margin:2px 0 4px}.ai-step p{font-size:12px;color:#868d91;line-height:1.7;margin:0}
+.ai-wide{width:100%;display:flex;align-items:center;justify-content:space-between}
+.ai-prompt-preview{border:1px solid #e7e5de;border-radius:8px;overflow:hidden}.ai-prompt-preview summary{cursor:pointer;padding:11px 14px;font-size:12px;color:#777;list-style-position:inside}
+.ai-prompt-preview textarea{border:0;border-top:1px solid #ebe9e4;width:100%;padding:13px;color:#555;font-size:11px;line-height:1.7;resize:vertical;background:#faf9f7;box-sizing:border-box}
+.ai-input-label{font-size:12px;font-weight:750;margin-top:5px}.ai-json-input{resize:vertical;width:100%;box-sizing:border-box;border:1px solid #dcdcd6;border-radius:8px;padding:13px 14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.7;min-height:165px;background:#faf9f7}
+.ai-actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.ai-preview{display:block}.ai-preview-success{padding:14px 16px;background:#f2f5f0;border:1px solid #d9e3d6;border-radius:8px;display:flex;flex-direction:column;gap:3px}.ai-preview-success b{color:#345940;font-size:13px}.ai-preview-success span{font-size:11px;color:#738477}
+.ai-preview-row{border-bottom:1px solid #ebe8e2;padding:12px 4px}.ai-preview-row span{font-size:10px;color:#ad8d63;font-weight:800}.ai-preview-row p{font-size:13px;line-height:1.6;margin:3px 0}.ai-preview-row small{color:#8c9294;font-size:10px}
+.ai-error{padding:12px 14px;background:#fff2ef;color:#b54f35;border-radius:7px;font-size:12px}
+.ai-footnote{font-size:11px;color:#92999d;line-height:1.65;margin:7px 0}
+#ai-import-confirm:disabled{opacity:.5}
+@media(max-width:940px){.scene-grid,.scene-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:630px){
+ .quick-access{grid-template-columns:1fr;gap:9px}.quick-access button{padding:18px;gap:5px}
+ .scene-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:18px 0 27px}
+ .scene-choice{padding:14px 9px;gap:6px;min-height:85px}.scene-symbol{width:25px;height:27px;font-size:19px}.scene-text strong{font-size:11px}.scene-text small{font-size:9px}
+ .scene-reco-head{display:block}.scene-reco-head h2{font-size:20px}.scene-reco-head button{margin-top:14px}
+ .scene-results{grid-template-columns:1fr;gap:10px}.scene-result{min-height:200px;padding:22px 19px}.scene-result-quote{font-size:20px;margin:16px 0 9px}
+ .scene-bottom{align-items:flex-start;flex-direction:column;gap:7px}
+ .ai-actions{display:grid;grid-template-columns:1fr 1fr}.ai-actions button{min-width:0;padding:12px 8px;font-size:11px}
+ .modal-footer #ai-import-confirm{min-width:0}
+}
+.scene-checks{display:flex;gap:7px;flex-wrap:wrap}.scene-check{display:flex!important;align-items:center;gap:5px;font-size:11px!important;font-weight:650!important;background:#f5f3ee;padding:8px 10px;border-radius:6px;margin:0!important}.scene-check input{width:14px!important;height:14px!important;accent-color:#b4966e}
 
   </style>
   <title>THE CODE — Personal Manifesto</title>
@@ -49,7 +124,7 @@
 
     <div class="app-body">
       <header class="topbar">
-        <div class="topbar-left"><button class="mobile-menu" type="button" id="mobile-menu" aria-label="メニューを開く"><span data-icon="menu"></span></button><span class="topbar-tag">BUILD YOUR OWN STANDARD</span><span class="topbar-line"></span><span class="topbar-clock" id="current-date"></span></div>
+        <div class="topbar-left"><button class="mobile-menu" type="button" id="mobile-menu" aria-label="メニューを開く"><span data-icon="menu"></span></button><span class="mobile-brand">THE CODE<span style="color:#b79a72">.</span></span><span class="topbar-tag">BUILD YOUR OWN STANDARD</span><span class="topbar-line"></span><span class="topbar-clock" id="current-date"></span></div>
         <div class="topbar-right"><div class="streak-mini"><span class="flame-icon" data-icon="flame"></span><strong id="top-streak">0</strong><span>DAY STREAK</span></div><button type="button" class="top-add" data-action="add"><span>＋</span><span>言葉を追加</span></button></div>
       </header>
 
@@ -180,10 +255,10 @@ function closeModal(){$('#modal-root').innerHTML='';document.body.style.overflow
 function modal(title,kicker,content,footer){document.body.style.overflow='hidden';$('#modal-root').innerHTML=`<div class="modal-overlay"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-header"><div><p>${esc(kicker)}</p><h2 id="modal-title">${esc(title)}</h2></div><button type="button" class="modal-close" data-action="close-modal" aria-label="閉じる">×</button></div><div class="modal-content">${content}</div><div class="modal-footer">${footer}</div></div></div>`;const inp=$('#modal-root input:not([type=checkbox])');if(inp)inp.focus();}
 function editQuote(id){const q=id?data.quotes.find(q=>q.id===id):null;if(id&&!q)return;
  const select=data.categories.map(c=>`<option value="${esc(c.id)}" ${(q?.category||'work')===c.id?'selected':''}>${esc(c.name)}</option>`).join('');
- const content=`<form id="quote-form"><div class="field"><label for="quote-text">心に残したい言葉 <span style="color:#ad8460">*</span></label><textarea id="quote-text" name="text" maxlength="1000" minlength="1" required placeholder="例：自分の基準を、他人の評価に預けない。">${esc(q?.text||'')}</textarea><div class="hint">本、映画、人の言葉、自分の考え。何でもOKです。</div></div><div class="field-row"><div class="field"><label for="quote-category">ジャンル</label><select id="quote-category" name="category">${select}</select></div><div class="field"><label for="quote-source">出典・自分なりのタイトル</label><input id="quote-source" name="source" maxlength="120" placeholder="例：MY PRINCIPLE / 書籍名" value="${esc(q?.source||'')}" /></div></div><div class="field"><label for="quote-note">自分にとっての意味・使いたい場面</label><textarea id="quote-note" name="note" maxlength="2500" placeholder="なぜ響いた？ どんな行動に変える？">${esc(q?.note||'')}</textarea></div><div class="field"><label for="quote-tags">検索用タグ（任意）</label><input id="quote-tags" name="tags" maxlength="250" placeholder="決断, 自信, 主体性" value="${esc((q?.tags||[]).join(', '))}" /></div><label class="check-label"><input type="checkbox" name="favorite" ${q?.favorite?'checked':''} /> 特に大切な言葉としてお気に入りに登録</label></form>`;
+ const content=`<form id="quote-form"><div class="field"><label for="quote-text">心に残したい言葉 <span style="color:#ad8460">*</span></label><textarea id="quote-text" name="text" maxlength="1000" minlength="1" required placeholder="例：自分の基準を、他人の評価に預けない。">${esc(q?.text||'')}</textarea><div class="hint">本、映画、人の言葉、自分の考え。何でもOKです。</div></div><div class="field-row"><div class="field"><label for="quote-category">ジャンル</label><select id="quote-category" name="category">${select}</select></div><div class="field"><label for="quote-source">出典・自分なりのタイトル</label><input id="quote-source" name="source" maxlength="120" placeholder="例：MY PRINCIPLE / 書籍名" value="${esc(q?.source||'')}" /></div></div><div class="field"><label for="quote-note">自分にとっての意味・使いたい場面</label><textarea id="quote-note" name="note" maxlength="2500" placeholder="なぜ響いた？ どんな行動に変える？">${esc(q?.note||'')}</textarea></div><div class="field"><label for="quote-tags">検索用タグ（任意）</label><input id="quote-tags" name="tags" maxlength="250" placeholder="決断, 自信, 主体性" value="${esc((q?.tags||[]).join(', '))}" /></div><div class="field"><label>おすすめシーン（任意）</label><div class="scene-checks">${[['morning','朝'],['work','仕事'],['anxiety','不安'],['failure','失敗'],['motivation','やる気'],['decision','決断'],['relationships','人間関係'],['challenge','挑戦'],['reset','休息']].map(([value,label])=>`<label class="scene-check"><input type="checkbox" name="scene" value="${value}" ${(q?.scenes||[]).includes(value)?'checked':''} />${label}</label>`).join('')}</div></div><label class="check-label"><input type="checkbox" name="favorite" ${q?.favorite?'checked':''} /> 特に大切な言葉としてお気に入りに登録</label></form>`;
  const footer=`${q?`<button type="button" class="btn-danger" data-action="delete" data-id="${esc(q.id)}">この言葉を削除</button>`:'<span class="muted-small">THE CODE / STAY TRUE.</span>'}<div class="right"><button type="button" class="btn-outline" data-action="close-modal">キャンセル</button><button type="submit" class="btn-black" form="quote-form">${q?'変更を保存':'言葉を保存'} ${icon('arrow')}</button></div>`;
  modal(q?'言葉を編集する':'新しい言葉を追加する',q?'EDIT PRINCIPLE':'ADD TO YOUR CODE',content,footer);
- $('#quote-form').addEventListener('submit',ev=>{ev.preventDefault();const form=new FormData(ev.currentTarget);const text=String(form.get('text')||'').trim();if(!text){toast('言葉を入力してください。');return;}const stamp=new Date().toISOString();const payload={text,category:String(form.get('category')||'other'),source:String(form.get('source')||'').trim(),note:String(form.get('note')||'').trim(),tags:String(form.get('tags')||'').split(/[,、，]/).map(x=>x.trim()).filter(Boolean).slice(0,20),favorite:form.has('favorite'),updatedAt:stamp,example:false};if(q)Object.assign(q,payload);else data.quotes.unshift({...payload,id:uid(),createdAt:stamp,nextReview:today(),lastReviewed:null,reviewCount:0});persist();closeModal();render();toast(q?'言葉を更新しました。':'あなたのコードに言葉を追加しました。');});}
+ $('#quote-form').addEventListener('submit',ev=>{ev.preventDefault();const form=new FormData(ev.currentTarget);const text=String(form.get('text')||'').trim();if(!text){toast('言葉を入力してください。');return;}const stamp=new Date().toISOString();const payload={text,category:String(form.get('category')||'other'),source:String(form.get('source')||'').trim(),note:String(form.get('note')||'').trim(),tags:String(form.get('tags')||'').split(/[,、，]/).map(x=>x.trim()).filter(Boolean).slice(0,20),favorite:form.has('favorite'),scenes:form.getAll('scene').map(String),updatedAt:stamp,example:false};if(q)Object.assign(q,payload);else data.quotes.unshift({...payload,id:uid(),createdAt:stamp,nextReview:today(),lastReviewed:null,reviewCount:0});persist();closeModal();render();toast(q?'言葉を更新しました。':'あなたのコードに言葉を追加しました。');});}
 function manageCategories(){const rows=data.categories.map(c=>`<div class="manage-row"><div class="left"><span class="category-dot" style="background:${esc(c.color)}"></span>${esc(c.name)} <span class="muted-small">${data.quotes.filter(q=>q.category===c.id).length}件</span></div><div class="manage-actions"><button type="button" data-action="rename-category" data-id="${esc(c.id)}">名前変更</button>${c.id==='other'?'':`<button class="danger" type="button" data-action="delete-category" data-id="${esc(c.id)}">削除</button>`}</div></div>`).join('');
  modal('ジャンルを管理','ORGANIZE YOUR PRINCIPLES',`<div class="muted-small">ジャンルを追加・変更できます。削除したジャンルの言葉は「その他」に移動します。</div>${rows}<form id="category-form" style="margin-top:23px"><div class="field"><label for="new-category">新しいジャンル名</label><input id="new-category" name="name" maxlength="24" placeholder="例：リーダーシップ、健康、挑戦" required /></div></form>`,`<button type="button" class="btn-outline" data-action="close-modal">閉じる</button><button class="btn-black" form="category-form" type="submit">＋ ジャンルを追加</button>`);
  $('#category-form').addEventListener('submit',ev=>{ev.preventDefault();const name=String(new FormData(ev.currentTarget).get('name')||'').trim();if(!name)return;if(data.categories.some(c=>c.name===name)){toast('同じ名前のジャンルがあります。');return;}if(data.categories.length>=30){toast('ジャンルは30個まで追加できます。');return;}const colors=['#a8997c','#7897a2','#a68c9a','#889a83','#ac8d75','#8899aa','#b49f7e'];data.categories.splice(Math.max(data.categories.length-1,0),0,{id:uid(),name,color:colors[data.categories.length%colors.length],fixed:false});persist();manageCategories();render();toast('ジャンルを追加しました。');});}
@@ -196,7 +271,7 @@ function safeImport(raw){let parsed=JSON.parse(raw);if(parsed?.format==='the-cod
  if(!parsed||!Array.isArray(parsed.quotes)||!Array.isArray(parsed.categories))throw Error('THE CODEのバックアップではありません。');
  const categories=parsed.categories.filter(c=>c&&typeof c.id==='string'&&typeof c.name==='string'&&typeof c.color==='string').slice(0,30).map(c=>({id:c.id,name:c.name.slice(0,45),color:/^#[0-9a-fA-F]{6}$/.test(c.color)?c.color:'#889198',fixed:!!c.fixed}));
  if(!categories.some(c=>c.id==='other'))categories.push(BASE_CATS.find(c=>c.id==='other'));
- const valid=new Set(categories.map(c=>c.id));const quotes=parsed.quotes.filter(q=>q&&typeof q.text==='string'&&q.text.trim()).slice(0,30000).map(q=>({id:typeof q.id==='string'&&q.id?q.id:uid(),category:valid.has(q.category)?q.category:'other',text:q.text.slice(0,1000),note:String(q.note||'').slice(0,2500),source:String(q.source||'').slice(0,120),tags:Array.isArray(q.tags)?q.tags.map(t=>String(t).slice(0,40)).slice(0,20):[],favorite:!!q.favorite,example:!!q.example,createdAt:typeof q.createdAt==='string'?q.createdAt:new Date().toISOString(),updatedAt:typeof q.updatedAt==='string'?q.updatedAt:new Date().toISOString(),nextReview:/^\d{4}-\d\d-\d\d$/.test(q.nextReview||'')?q.nextReview:today(),lastReviewed:typeof q.lastReviewed==='string'?q.lastReviewed:null,reviewCount:Math.max(0,Number(q.reviewCount)||0)}));
+ const valid=new Set(categories.map(c=>c.id));const quotes=parsed.quotes.filter(q=>q&&typeof q.text==='string'&&q.text.trim()).slice(0,30000).map(q=>({id:typeof q.id==='string'&&q.id?q.id:uid(),category:valid.has(q.category)?q.category:'other',text:q.text.slice(0,1000),note:String(q.note||'').slice(0,2500),source:String(q.source||'').slice(0,120),tags:Array.isArray(q.tags)?q.tags.map(t=>String(t).slice(0,40)).slice(0,20):[],scenes:Array.isArray(q.scenes)?q.scenes.filter(x=>typeof x==='string').slice(0,9):[],favorite:!!q.favorite,example:!!q.example,createdAt:typeof q.createdAt==='string'?q.createdAt:new Date().toISOString(),updatedAt:typeof q.updatedAt==='string'?q.updatedAt:new Date().toISOString(),nextReview:/^\d{4}-\d\d-\d\d$/.test(q.nextReview||'')?q.nextReview:today(),lastReviewed:typeof q.lastReviewed==='string'?q.lastReviewed:null,reviewCount:Math.max(0,Number(q.reviewCount)||0)}));
  return {schema:1,categories,quotes,settings:{dailyCount:[3,5,10].includes(Number(parsed.settings?.dailyCount))?Number(parsed.settings.dailyCount):3,reminderTime:/^\d\d:\d\d$/.test(parsed.settings?.reminderTime||'')?parsed.settings.reminderTime:'08:00'},reviewDays:Array.isArray(parsed.reviewDays)?[...new Set(parsed.reviewDays.filter(x=>/^\d{4}-\d\d-\d\d$/.test(x)))]:[]};}
 async function importFile(file){if(!file)return;try{if(file.size>12*1024*1024)throw Error('12MB以下のファイルを選択してください。');const incoming=safeImport(await file.text());const replace=confirm(`バックアップに${incoming.quotes.length}件の言葉があります。\n\nOK：現在のデータを置き換える\nキャンセル：置き換えず、追加方法を選ぶ`);
  if(replace){data=incoming;}else if(confirm('現在のデータを残して、バックアップの言葉を追加しますか？（同じIDの言葉は重複しません）')){for(const c of incoming.categories){if(!data.categories.some(x=>x.id===c.id)){if(data.categories.length>=30)break;data.categories.push(c);}}const known=new Set(data.quotes.map(q=>q.id));for(const q of incoming.quotes){if(!known.has(q.id)){data.quotes.push(q);known.add(q.id);}}data.reviewDays=[...new Set([...data.reviewDays,...incoming.reviewDays])];}else{return;}
@@ -228,9 +303,194 @@ document.addEventListener('change',ev=>{if(ev.target.id==='sort-select'){ui.sort
 $('#import-file').addEventListener('change',async ev=>{const file=ev.target.files?.[0];await importFile(file);ev.target.value='';});
 $('#mobile-menu').addEventListener('click',()=>{$('#sidebar').classList.toggle('open');$('#sidebar-scrim').classList.toggle('visible');});
 $('#sidebar-scrim').addEventListener('click',closeMenu);
+window.TheCodeBridge = {
+ get data(){return data;}, get ui(){return ui;},
+ persist, toast, modal, closeModal, navigate, uid, today,
+ categoryName: id => cat(id).name,
+ render: () => render(),
+ extend: (sceneRenderer, afterRender) => {
+   const originalRender = render;
+   render = function(){
+     if(ui.view === 'scenes'){
+       renderNav();
+       $('#main-content').innerHTML = sceneRenderer();
+     } else { originalRender(); }
+     afterRender();
+   };
+   afterRender();
+ }
+};
 render();
 })();
 
   </script>
+<script>
+/* THE CODE / Personal Manifesto — Scene guidance & AI collection */
+(() => {
+  'use strict';
+  const bridge = window.TheCodeBridge;
+  if (!bridge) { console.error('THE CODE extension: app bridge unavailable'); return; }
+  const SCENES = [
+    {id:'morning', icon:'☀', label:'朝、気持ちを整える', desc:'一日の基準を決めたい', cats:['discipline','life'], terms:['朝','一日','始め','今日','習慣','準備','基準','routine','discipline']},
+    {id:'work', icon:'◆', label:'仕事で成果を出したい', desc:'集中し、結果につなげたい', cats:['work','discipline'], terms:['仕事','成果','結果','責任','行動','準備','実行','挑戦','work','outcome']},
+    {id:'anxiety', icon:'◈', label:'不安・プレッシャー', desc:'冷静さと自信を取り戻す', cats:['mental'], terms:['不安','恐れ','冷静','感情','自信','評価','判断','落ち着','pressure','control']},
+    {id:'failure', icon:'↗', label:'失敗・落ち込んだとき', desc:'失敗から次の一歩へ', cats:['mental','life'], terms:['失敗','間違','成長','立ち直','昨日','比較','一歩','反省','次','失敗']},
+    {id:'motivation', icon:'⚡', label:'やる気が出ないとき', desc:'気分に左右されず動く', cats:['discipline','work'], terms:['継続','努力','約束','習慣','行動','積み上げ','毎日','気分','規律','consistency']},
+    {id:'decision', icon:'◇', label:'大切な決断をするとき', desc:'自分の価値観で選び抜く', cats:['life','mental'], terms:['決断','選択','判断','迷','自分','基準','意図','優先','決め','choose']},
+    {id:'relationships', icon:'◎', label:'人間関係に悩むとき', desc:'誠実さと距離感を見つめる', cats:['relationships','mental'], terms:['他人','関係','誠実','信頼','人','態度','言葉','評価','尊重','character']},
+    {id:'challenge', icon:'✦', label:'新しい挑戦の前に', desc:'勇気を出して踏み出す', cats:['work','life'], terms:['挑戦','一歩','勇気','未来','準備','実行','行動','恐れ','可能','成長']},
+    {id:'reset', icon:'◌', label:'疲れた・立て直したい', desc:'焦りを手放し自分を戻す', cats:['mental','life'], terms:['休','余白','自分','焦','感情','比較','長期','立て直','ペース','冷静']}
+  ];
+  const FORMAT = 'the-code-ai-v1';
+  const PROMPT = `あなたは「THE CODE」という、自分の人生の行動指針を集めるアプリに登録するための編集者です。これから私が送る文章、写真、メモ、読書ノートから、心に残る言葉・自分の軸になる信条を抽出して整理してください。\n\n【厳守】\n・入力にない内容、人物名、出典を事実として創作しない。判読不能な写真の文字は推測しない。\n・著作物は長い文章をそのまま転載せず、短い引用または独自の言葉による要約にする。引用なら実際の出典を記載し、要約なら「要約」と明示する。\n・言葉は短く、力強く、日常の行動に落とし込める日本語にする。\n・意味が重なるものは統合し、重複登録を避ける。\n・ジャンルは work（仕事・キャリア）、mental（メンタル）、discipline（習慣・自己規律）、life（人生・価値観）、relationships（人間関係）、other（その他）のいずれか。\n・scenes は morning（朝）、work（仕事）、anxiety（不安）、failure（失敗）、motivation（やる気）、decision（決断）、relationships（人間関係）、challenge（挑戦）、reset（休息）から、該当するものを1〜3個選ぶ。\n・source は判明している出典のみ。不明なら「自分の言葉」または「原文からの要約」。note にはこの言葉を日常でどう使うかを1文で記載。\n・説明文やMarkdownのコードフェンスは一切出さず、正しいJSONだけ出力する。\n\n【出力形式】\n{\n  "format": "the-code-ai-v1",\n  "quotes": [\n    {\n      "text": "短く力強い言葉",\n      "category": "work",\n      "source": "出典（不明なら要約）",\n      "note": "いつ・どんな行動に落とし込むか",\n      "tags": ["主体性", "実行"],\n      "scenes": ["work", "challenge"]\n    }\n  ]\n}\n\nこの後に素材を送ります。素材を受け取ってからJSONを作成してください。`;
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const state = {scene:'work', offset:0, pending:[], pendingDuplicates:0};
+  const getData = () => bridge.data;
+  const short = (s,n) => String(s??'').slice(0,n);
+  function currentScene(){return SCENES.find(s=>s.id===state.scene)||SCENES[0];}
+  function sceneLabel(id){return SCENES.find(s=>s.id===id)?.label || ''}
+  function sceneMatch(q, scene){
+    const tags = Array.isArray(q.tags)?q.tags.map(x=>String(x).toLowerCase()):[];
+    const words = `${q.text||''} ${q.note||''} ${q.source||''}`.toLowerCase();
+    const assigned = Array.isArray(q.scenes)?q.scenes:[];
+    let score = assigned.includes(scene.id) ? 45 : 0;
+    if (scene.cats.includes(q.category)) score += 10;
+    for (const term of scene.terms) {
+      const word = term.toLowerCase();
+      if (tags.some(t=>t.includes(word))) score+=9;
+      if (words.includes(word)) score+=4;
+    }
+    if (q.favorite) score+=2;
+    return score;
+  }
+  function rank(scene){
+    const qs=getData().quotes;
+    return qs.map((q,i)=>({q,score:sceneMatch(q,scene),tie:((i+state.offset)%Math.max(qs.length,1))})).sort((a,b)=>b.score-a.score||a.tie-b.tie);
+  }
+  function renderScenes(){
+    const scene=currentScene(); const rows=rank(scene); const matches=rows.filter(x=>x.score>2);
+    const take = (matches.length>=3?matches:rows).slice(0,3);
+    return `<section class="scene-page"><div class="page-heading"><div><p class="eyebrow">SCENE-BASED PRINCIPLES / THE CODE</p><h1>今の自分に、必要な言葉。</h1><p class="subhead">状況を選ぶと、あなたが保存した言葉からおすすめを選びます。</p></div></div>
+      <div class="scene-grid" role="group" aria-label="場面を選択">${SCENES.map(s=>`<button type="button" class="scene-choice ${state.scene===s.id?'selected':''}" data-action="scene-select" data-scene="${s.id}" aria-pressed="${state.scene===s.id}"><span class="scene-symbol">${s.icon}</span><span class="scene-text"><strong>${esc(s.label)}</strong><small>${esc(s.desc)}</small></span></button>`).join('')}</div>
+      <div class="scene-reco-head"><div><p class="eyebrow">THE RIGHT WORDS / RIGHT NOW</p><h2>${esc(scene.label)}</h2><p>${esc(scene.desc)}。${matches.length<3?'関連する言葉が少ないため、他の保存済みの言葉も含めて表示しています。':'保存された言葉のジャンル・タグ・内容をもとに選んでいます。'}</p></div><button class="btn-outline" type="button" data-action="scene-refresh">別の言葉を見る ↻</button></div>
+      ${take.length?`<div class="scene-results">${take.map((it,i)=>`<article class="scene-result"><div class="scene-result-number">0${i+1} / PERSONAL CODE</div><div class="scene-result-quote">${esc(it.q.text)}</div>${it.q.note?`<p class="scene-result-note">${esc(it.q.note)}</p>`:''}<div class="scene-result-foot"><span>${esc(bridge.categoryName(it.q.category))} · ${esc(it.q.source||'MY PRINCIPLE')}</span><button type="button" data-action="quote-review" data-id="${esc(it.q.id)}">この言葉を読む ↗</button></div></article>`).join('')}</div>`:`<div class="empty-state"><h3>まだ言葉がありません。</h3><p>まずは1件追加するか、AIで抽出した言葉を取り込んでください。</p><button class="btn-black" data-action="ai-import">AIで名言を取り込む</button></div>`}
+      <div class="scene-bottom"><button type="button" class="btn-outline" data-action="ai-import">＋ AIで抽出した言葉を取り込む</button><p>おすすめは端末内の保存データだけで選定します。AIへの自動送信はありません。</p></div></section>`;
+  }
+  function decorate(){
+    const nav=document.querySelector('.primary-nav');
+    if(nav && !nav.querySelector('[data-view="scenes"]')){
+      nav.insertAdjacentHTML('beforeend','<button class="nav-link" data-view="scenes" type="button"><span class="nav-icon">✦</span><span>シーン別のおすすめ</span></button><button class="nav-link" data-action="ai-import" type="button"><span class="nav-icon">⇪</span><span>AI名言を一括登録</span></button>');
+    }
+    document.querySelectorAll('.primary-nav .nav-link[data-view="scenes"]').forEach(el=>el.classList.toggle('active',bridge.ui.view==='scenes'));
+    if (bridge.ui.view==='home'){
+      const stats=document.querySelector('.stats-grid');
+      if(stats && !document.querySelector('.quick-access')) stats.insertAdjacentHTML('afterend',`<section class="quick-access" aria-label="クイックアクセス"><button type="button" data-view="scenes"><span>✦ <b>今の自分に合う言葉</b></span><small>シーン別おすすめを見る →</small></button><button type="button" data-action="ai-import"><span>⇪ <b>AIの名言をまとめて登録</b></span><small>プロンプトをコピー・JSONを取り込む →</small></button></section>`);
+    }
+    if(bridge.ui.view==='library'){
+      const heading=document.querySelector('.page-heading');
+      if(heading && !heading.querySelector('[data-action="ai-import"]')) heading.insertAdjacentHTML('beforeend','<button class="btn-outline" type="button" data-action="ai-import">⇪ AI抽出JSONを取り込む</button>');
+    }
+    if(bridge.ui.view==='settings'){
+      const grid=document.querySelector('.settings-grid');
+      if(grid && !document.querySelector('.ai-settings-panel')) grid.insertAdjacentHTML('afterbegin',`<section class="panel settings-panel ai-settings-panel"><p class="eyebrow">AI / BULK COLLECTION</p><h3>AIで名言を一括登録</h3><p>専用プロンプトをコピーしてChatGPTなどに渡し、返ってきたJSONを貼り付けて追加できます。既存データは置き換えません。</p><button class="btn-black" data-action="ai-import">⇪ AI取込を開く</button></section>`);
+    }
+  }
+  bridge.extend(renderScenes,decorate);
+  function openImporter(){
+    state.pending=[];
+    bridge.modal('AI抽出した言葉を取り込む','AI COLLECTION / BULK IMPORT',`<div class="ai-importer"><div class="ai-step"><span>01</span><div><h3>AI用プロンプトをコピー</h3><p>ChatGPTなどに貼り付け、続けて本やメモの文章・画像を送ります。</p></div></div><button type="button" class="btn-outline ai-wide" data-action="copy-prompt">プロンプトをコピー <span>▣</span></button><details class="ai-prompt-preview"><summary>プロンプト全文を表示する</summary><textarea readonly rows="9" id="ai-prompt-text">${esc(PROMPT)}</textarea></details>
+    <div class="ai-step"><span>02</span><div><h3>AIが返したJSONを貼り付け</h3><p>コードフェンス付きでもOK。既存の言葉は消さず、重複を省いて追加します。</p></div></div><label for="ai-json-input" class="ai-input-label">JSONを入力</label><textarea id="ai-json-input" class="ai-json-input" placeholder='{"format":"the-code-ai-v1","quotes":[{"text":"自分の基準を守る。","category":"mental","note":"...","tags":["自信"],"scenes":["anxiety"]}]}' spellcheck="false" rows="8"></textarea><div class="ai-actions"><button type="button" class="btn-outline" data-action="ai-upload">JSONファイルを選ぶ</button><button type="button" class="btn-black" data-action="ai-preview">内容を確認する →</button></div><input type="file" id="ai-json-file" accept=".json,application/json,text/plain" hidden><div id="ai-preview" role="status" class="ai-preview"></div><p class="ai-footnote">外部AIとの直接連携はありません。貼り付けたデータはこの端末で処理されます。取込後は設定からバックアップを作成してください。</p></div>`,`<button type="button" class="btn-outline" data-action="close-modal">閉じる</button><button class="btn-black" id="ai-import-confirm" data-action="ai-commit" type="button" disabled>取り込む</button>`);
+  }
+  function normalized(s){return String(s||'').normalize('NFKC').toLowerCase().replace(/[\s\u3000、，。．・!！?？"“”'‘’「」『』]/g,'');}
+  function categoryId(value,text,tags){
+    const category=String(value??'').trim().toLowerCase();
+    const ids=new Set(getData().categories.map(c=>c.id));
+    if(ids.has(category))return category;
+    const byName=getData().categories.find(c=>c.name===value); if(byName)return byName.id;
+    const rules=[[/仕事|キャリア|会計|監査|経営|business|career|leadership|work/,'work'],[/メンタル|心|不安|感情|精神|mental|mind/,'mental'],[/習慣|規律|努力|継続|学習|discipline|habit/,'discipline'],[/人生|価値観|生き方|life|value/,'life'],[/人間関係|恋愛|信頼|誠実|relationship/,'relationships']];
+    for(const [re,id] of rules)if(re.test(category))return id;
+    const combined=`${text} ${tags.join(' ')}`;
+    for(const [re,id] of rules)if(re.test(combined))return id;
+    return 'other';
+  }
+  function parsedQuote(q){
+    if(!q || typeof q!=='object' || Array.isArray(q))return null;
+    const text=short(q.text??q.quote??q.word??q.言葉,1000).trim();if(!text)return null;
+    const note=short(q.note??q.meaning??q.description??q.メモ,2500).trim();
+    const source=short(q.source??q.author??q.出典,120).trim();
+    const tags=Array.isArray(q.tags)?q.tags.map(x=>short(x,40).trim()).filter(Boolean).slice(0,20):typeof q.tags==='string'?q.tags.split(/[,、，]/).map(s=>short(s.trim(),40)).filter(Boolean).slice(0,20):[];
+    const rawScenes=Array.isArray(q.scenes)?q.scenes:typeof q.scene==='string'?[q.scene]:[];
+    const scenes=rawScenes.map(x=>{const str=String(x).trim();return SCENES.find(s=>s.id===str||s.label===str)?.id||''}).filter(Boolean).slice(0,9);
+    return {text,note,source,category:categoryId(q.category??q.genre??q.ジャンル,text,tags),tags,scenes,favorite:q.favorite===true};
+  }
+  function readAI(raw){
+    let input=String(raw||'').trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```\s*$/,'').trim();
+    if(input.charCodeAt(0)===0xfeff)input=input.slice(1);
+    if(!input)throw Error('JSONを貼り付けるか、ファイルを選択してください。');
+    let obj;try{obj=JSON.parse(input)}catch{throw Error('JSONの形式が正しくありません。「JSONだけ出力」とAIに指示してください。')}
+    if(obj && obj.format==='the-code-backup-v1')throw Error('これはバックアップです。設定の「JSONを読み込む」を使用してください。');
+    const arr=Array.isArray(obj)?obj:obj?.quotes;
+    if(!Array.isArray(arr))throw Error('quotes 配列がありません。専用プロンプトのJSON形式をご利用ください。');
+    if(arr.length>300)throw Error('一度に取り込めるのは300件までです。分割してください。');
+    const known=new Set(getData().quotes.map(q=>normalized(q.text)));
+    const pending=[];let duplicates=0;
+    for(const item of arr){const q=parsedQuote(item);if(!q)continue;const key=normalized(q.text);if(!key)continue;if(known.has(key)){duplicates++;continue;}known.add(key);pending.push(q);}
+    return {pending,duplicates,received:arr.length};
+  }
+  function previewAI(raw){
+    try{
+      const r=readAI(raw);state.pending=r.pending;state.pendingDuplicates=r.duplicates;
+      const area=document.querySelector('#ai-preview');if(!area)return;
+      area.innerHTML=`<div class="ai-preview-success"><b>${r.pending.length}件を追加できます</b><span>元データ ${r.received}件 / 重複 ${r.duplicates}件 / 空欄など ${r.received-r.pending.length-r.duplicates}件</span></div>${r.pending.slice(0,8).map(q=>`<div class="ai-preview-row"><span>${esc(bridge.categoryName(q.category))}</span><p>${esc(q.text)}</p><small>${q.scenes.map(sceneLabel).filter(Boolean).join(' ・ ')||'シーンは内容から自動判定'}</small></div>`).join('')}${r.pending.length>8?`<p class="ai-footnote">ほか ${r.pending.length-8}件</p>`:''}`;
+      const commit=document.querySelector('#ai-import-confirm');commit.disabled=r.pending.length===0;commit.textContent=r.pending.length?`${r.pending.length}件を追加する`:'追加できる言葉がありません';
+    }catch(e){state.pending=[];const area=document.querySelector('#ai-preview');if(area)area.innerHTML=`<p class="ai-error">${esc(e.message)}</p>`;const commit=document.querySelector('#ai-import-confirm');if(commit)commit.disabled=true;}
+  }
+  function commitAI(){
+    if(!state.pending.length)return;
+    const data=getData();const known=new Set(data.quotes.map(q=>normalized(q.text)));
+    if(data.quotes.length>=30000){bridge.toast('保存上限に達しています。');return;}
+    let n=0;const stamp=new Date().toISOString();
+    for(const p of state.pending){if(data.quotes.length>=30000)break;const key=normalized(p.text);if(known.has(key))continue;known.add(key);
+      data.quotes.unshift({...p,id:bridge.uid(),createdAt:stamp,updatedAt:stamp,nextReview:bridge.today(),lastReviewed:null,reviewCount:0,example:false,origin:'ai-import'});n++;
+    }
+    if(!n){bridge.toast('追加できる言葉はありません。');return;}
+    if(!bridge.persist()){bridge.toast('保存に失敗しました。空き容量を確認してください。');return;}
+    bridge.closeModal();bridge.render();bridge.toast(`${n}件の言葉を追加しました。`);
+  }
+  async function copyPrompt(){
+    try{
+      if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(PROMPT);
+      else {const t=document.createElement('textarea');t.value=PROMPT;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();if(!document.execCommand('copy'))throw Error('copy failed');t.remove();}
+      bridge.toast('AI抽出用プロンプトをコピーしました。');
+    }catch{const t=document.querySelector('#ai-prompt-text');t?.closest('details')?.setAttribute('open','');t?.focus();t?.select();bridge.toast('自動コピーできませんでした。選択した文章を手動でコピーしてください。');}
+  }
+  document.addEventListener('click',ev=>{
+    const btn=ev.target.closest('[data-action]');if(!btn)return;
+    const action=btn.dataset.action;
+    if(!['ai-import','copy-prompt','ai-upload','ai-preview','ai-commit','scene-select','scene-refresh'].includes(action))return;
+    ev.preventDefault();ev.stopImmediatePropagation();
+    switch(action){
+      case 'ai-import':openImporter();break;
+      case 'copy-prompt':void copyPrompt();break;
+      case 'ai-upload':document.querySelector('#ai-json-file')?.click();break;
+      case 'ai-preview':previewAI(document.querySelector('#ai-json-input')?.value||'');break;
+      case 'ai-commit':commitAI();break;
+      case 'scene-select':state.scene=btn.dataset.scene;state.offset=0;bridge.render();break;
+      case 'scene-refresh':state.offset++;bridge.render();break;
+    }
+  },true);
+  document.addEventListener('change',async ev=>{
+    if(ev.target?.id!=='ai-json-file')return;
+    const file=ev.target.files?.[0];if(!file)return;
+    try{if(file.size>2*1024*1024)throw Error('JSONファイルは2MB以下にしてください。');
+      const text=await file.text();const input=document.querySelector('#ai-json-input');if(input){input.value=text;previewAI(text);}
+    }catch(e){const area=document.querySelector('#ai-preview');if(area)area.innerHTML=`<p class="ai-error">${esc(e.message)}</p>`;}
+    ev.target.value='';
+  });
+  // Open a contextually useful scene from a URL, for example #scenes/anxiety.
+  const deepScene=location.hash.match(/^#scenes\/([a-z]+)$/);if(deepScene && SCENES.some(s=>s.id===deepScene[1])){state.scene=deepScene[1];bridge.navigate('scenes');}
+})();
+
+</script>
 </body>
 </html>
