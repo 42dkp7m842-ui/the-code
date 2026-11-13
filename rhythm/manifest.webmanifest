@@ -1,7 +1,7 @@
 {
-  "name": "RHYTHM — 習慣・仕組み化システム",
+  "name": "RHYTHM — 習慣・仕組み化システム 3.0",
   "short_name": "RHYTHM",
-  "description": "目標を毎日の行動に。習慣と目標の管理アプリ",
+  "description": "カレンダーで予定を管理し、ホームに今日だけ表示する行動管理システム",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
