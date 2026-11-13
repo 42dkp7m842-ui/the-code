@@ -34,12 +34,87 @@
 @media(max-width:430px){.template-list .btn{flex:1 1 calc(50% - 8px)}.focus-timer .timer-face{font-size:54px}}
 .project-heading{font-size:18px;line-height:1.5;margin-top:6px;letter-spacing:-.02em}
 
+/* RHYTHM 3.0 — calendar and today's schedule. */
+.timeline-section{margin-bottom:22px;padding:22px;overflow:hidden}
+.timeline-header{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:17px}
+.timeline-header h2{font-size:19px;line-height:1.4}
+.timeline-count{font-size:12px;color:var(--muted);font-weight:650;margin-left:7px}
+.timeline-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--border) transparent;border-radius:12px;background:var(--surface2);border:1px solid var(--border);padding:0 0 6px;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
+.timeline-canvas{position:relative;min-height:155px}
+.timeline-ticks{height:43px;position:relative;background:var(--surface2);border-bottom:1px solid var(--border)}
+.timeline-tick{position:absolute;top:15px;font-size:11px;letter-spacing:.03em;color:var(--muted);font-variant-numeric:tabular-nums;transform:translateX(7px);white-space:nowrap}
+.timeline-stage{position:relative;padding:10px 0;background:linear-gradient(180deg,var(--surface2),var(--surface))}
+.timeline-gridline{position:absolute;top:0;bottom:0;width:1px;background:var(--border);opacity:.64;pointer-events:none}
+.timeline-event{position:absolute;z-index:2;text-align:left;display:flex;flex-direction:column;gap:5px;border-radius:11px;border:1px solid transparent;padding:11px 12px;color:var(--text);min-width:0;min-height:65px;overflow:hidden;cursor:pointer;transition:filter .14s,transform .14s}
+.timeline-event:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.timeline-event:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.timeline-event strong{font-size:12px;line-height:1.2;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timeline-event-time{font-size:10px;font-variant-numeric:tabular-nums;font-weight:800;opacity:.92;white-space:nowrap}
+.timeline-event-type{font-size:10px;opacity:.8;white-space:nowrap}
+.timeline-event.event-done{opacity:.65}
+.timeline-event.event-done strong{text-decoration:line-through}
+.timeline-event.cat-study,.cal-agenda-row.cat-study{--event-color:#c9f478;--event-text:#16200e}
+.timeline-event.cat-work,.cal-agenda-row.cat-work{--event-color:#99c4ff;--event-text:#17263d}
+.timeline-event.cat-health,.cal-agenda-row.cat-health{--event-color:#8be7c8;--event-text:#123529}
+.timeline-event.cat-money,.cal-agenda-row.cat-money{--event-color:#f9d18e;--event-text:#3a2a16}
+.timeline-event.cat-living,.cal-agenda-row.cat-living{--event-color:#c9b2ff;--event-text:#302048}
+.timeline-event.cat-growth,.cal-agenda-row.cat-growth{--event-color:#ffb6a1;--event-text:#492318}
+.timeline-event.cat-other,.cal-agenda-row.cat-other{--event-color:#d4d6d2;--event-text:#282e2d}
+.timeline-event{background:var(--event-color);color:var(--event-text)}
+.timeline-now{position:absolute;top:0;bottom:0;width:2px;background:#fb7474;z-index:4;pointer-events:none}
+.timeline-now:before{content:"";position:absolute;top:0;left:-4px;border-radius:50%;width:10px;height:10px;background:#fb7474}
+.timeline-now>span{position:absolute;top:-34px;left:5px;color:#fb7474;font-weight:900;font-size:9px;letter-spacing:.09em}
+.timeline-helper{font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px}
+.timeline-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:30px 16px;background:var(--surface2);border-radius:13px;color:var(--muted);text-align:center}
+.timeline-empty strong{color:var(--text);font-size:14px}
+.timeline-empty p{font-size:11px;line-height:1.8;max-width:400px}
+.cal-main{margin-bottom:17px}
+.cal-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.cal-navigation{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cal-navigation h2{font-size:20px;min-width:156px;line-height:1.5}
+.cal-view-toggle{display:flex;gap:3px;background:var(--surface2);padding:4px;border-radius:11px;border:1px solid var(--border)}
+.cal-view-toggle button{border:0;background:transparent;color:var(--muted);padding:7px 15px;border-radius:8px;font-weight:750;font-size:12px}
+.cal-view-toggle button.active{background:var(--accent);color:#18220f}
+[data-theme="light"] .cal-view-toggle button.active{color:#fff}
+.cal-weekhead{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin-bottom:8px;text-align:center;font-size:11px;color:var(--muted);font-weight:760}
+.cal-month-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.cal-month-day{background:var(--surface2);border:1px solid var(--border);color:var(--text);text-align:left;min-height:109px;border-radius:11px;display:flex;flex-direction:column;gap:7px;padding:9px;min-width:0;transition:border-color .15s,background .15s}
+.cal-month-day:hover{background:var(--surface3)}
+.cal-month-day.selected{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.cal-month-day.today .cal-day-num{color:var(--accent)}
+.cal-month-day.outside{opacity:.4}
+.cal-day-num{font-size:13px;font-weight:850;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:4px}
+.cal-day-num small{font-size:9px;background:var(--accentsoft);padding:2px 4px;border-radius:3px}
+.cal-month-events{display:flex;flex-direction:column;gap:4px;min-width:0}
+.cal-pill{font-size:10px;padding:5px 6px;border-radius:5px;background:var(--surface3);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:3px solid var(--accent)}
+.cal-pill.cat-study{border-left-color:#c9f478}.cal-pill.cat-work{border-left-color:#99c4ff}.cal-pill.cat-health{border-left-color:#8be7c8}.cal-pill.cat-money{border-left-color:#f9d18e}.cal-pill.cat-living{border-left-color:#c9b2ff}.cal-pill.cat-growth{border-left-color:#ffb6a1}
+.cal-overflow{font-size:10px;color:var(--muted)}
+.cal-agenda-list{display:grid;gap:10px}
+.cal-agenda-row{display:flex;align-items:center;gap:13px;padding:13px;background:var(--surface2);border-radius:11px;border-left:4px solid var(--event-color)}
+.cal-agenda-row button{border:0;background:transparent;color:var(--text)}
+.cal-agenda-row .cal-time{font-weight:850;font-size:12px;display:grid;gap:4px;width:57px;flex:none;text-align:left;font-variant-numeric:tabular-nums}
+.cal-agenda-row .cal-time span{color:var(--muted);font-size:10px;font-weight:500}
+.cal-agenda-body{display:grid;gap:5px;flex:1;text-align:left;min-width:0}
+.cal-agenda-body strong{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal-agenda-body small{color:var(--muted);font-size:10px}
+.cal-toggle{border:1px solid var(--border)!important;background:var(--surface)!important;border-radius:50%;width:33px;height:33px;flex:none;display:grid;place-items:center;color:var(--muted)!important}
+.cal-toggle.checked{background:var(--accent)!important;color:#172013!important}
+.cal-agenda-blank{padding:27px 10px;text-align:center;color:var(--muted);font-size:12px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px}
+.cal-footnote{font-size:11px;color:var(--muted);line-height:1.75;margin-top:17px;border-top:1px solid var(--border);padding-top:14px}
+.schedule-detail{display:grid;gap:15px}
+.schedule-detail h2{font-size:25px}
+.schedule-detail .detail-time{display:flex;gap:10px;align-items:center;font-size:17px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.schedule-detail p{font-size:12px;line-height:1.7;white-space:pre-line}
+.wrap-right{flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:760px){.mobile-nav button{min-width:0;flex:1;padding:5px 1px;font-size:9px}.mobile-nav .ico{width:19px;height:19px}.timeline-section{padding:15px;margin:0 0 17px}.timeline-header{gap:10px}.timeline-header h2{font-size:17px}.timeline-header .page-actions{width:100%}.timeline-header .page-actions .btn{flex:1}.cal-main{padding:12px}.cal-month-grid{gap:3px}.cal-weekhead{gap:3px}.cal-month-day{padding:6px 4px;min-height:78px;border-radius:7px;gap:4px}.cal-month-day .cal-day-num{font-size:11px}.cal-day-num small{display:none}.cal-pill{font-size:8px;padding:4px 2px}.cal-overflow{font-size:9px}.cal-agenda{padding:16px}.cal-toolbar{margin-bottom:12px}.cal-navigation{gap:5px}.cal-navigation h2{font-size:17px;min-width:125px}.cal-agenda-row{gap:7px;padding:11px 8px}.cal-agenda-row .cal-time{width:53px}.modal-foot{flex-wrap:wrap}.modal-foot .right{max-width:100%}}
+@media(max-width:390px){.mobile-nav button{font-size:8px}.mobile-nav .ico{width:18px;height:18px}.cal-pill{max-height:20px;overflow:hidden}.cal-month-day{min-height:70px}.cal-navigation h2{font-size:15px;min-width:100px}}
+
 </style>
   <script>
 /* RHYTHM — local-first habit, goal and task system. No external dependencies. */
 (() => {
   'use strict';
-  const VERSION = 2;
+  const VERSION = 3;
   const DB_NAME = 'rhythm-life-db';
   const DB_STORE = 'documents';
   const RECORD_KEY = 'primary';
@@ -86,16 +161,16 @@
   const nfmt = n => Number(n||0).toLocaleString('ja-JP',{maximumFractionDigits:1});
   const cap = (num,lo,hi) => Math.min(hi,Math.max(lo,num));
   const num = (value,fallback=0) => { const v=Number(value); return Number.isFinite(v)?v:fallback; };
-  const defaultState = () => ({version:VERSION,createdAt:new Date().toISOString(),settings:{theme:'dark',dayBoundaryHour:0,reminderTime:'20:30',focusMinutes:25,lastSnapshot:''},goals:[],habits:[],tasks:[],projects:[],routines:[],habitLogs:[],routineLogs:[],dailyReviews:[],reviews:[]});
+  const defaultState = () => ({version:VERSION,createdAt:new Date().toISOString(),settings:{theme:'dark',dayBoundaryHour:0,reminderTime:'20:30',focusMinutes:25,lastSnapshot:''},goals:[],habits:[],tasks:[],projects:[],routines:[],habitLogs:[],routineLogs:[],dailyReviews:[],reviews:[],calendarEvents:[],calendarLogs:[]});
   let state = defaultState();
-  let ui = {tab:'today',date:'',planSub:'habits',goalFilter:'all',insightRange:7,modal:null,calendarMonth:'',dataMode:'db',saveWarning:false};
+  let ui = {tab:'today',date:'',planSub:'habits',goalFilter:'all',insightRange:7,modal:null,calendarMonth:'',calendarView:'month',dataMode:'db',saveWarning:false};
   let database = null; let saveQueue = Promise.resolve(); let toastTimer = null;
   function todayKey() {const d=new Date();if(d.getHours() < num(state.settings.dayBoundaryHour,4))d.setDate(d.getDate()-1);return dateKey(d);}
-  function currentKey(){return ui.date||todayKey();}
+  function currentKey(){return ui.tab==='today'?todayKey():(ui.date||todayKey());}
   function openDatabase(){return new Promise((resolve,reject)=>{if(!('indexedDB' in window))return reject(new Error('IndexedDB非対応'));const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains(DB_STORE))db.createObjectStore(DB_STORE);};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
   function readDatabase(db){return new Promise((resolve,reject)=>{const tx=db.transaction(DB_STORE,'readonly');const req=tx.objectStore(DB_STORE).get(RECORD_KEY);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);});}
   function writeDatabase(db,data){return new Promise((resolve,reject)=>{const tx=db.transaction(DB_STORE,'readwrite');tx.objectStore(DB_STORE).put(data,RECORD_KEY);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);});}
-  function normalizeData(data){if(!data||typeof data!=='object')throw new Error('データ形式が正しくありません。'); const base=defaultState();for(const key of ['goals','habits','tasks','projects','routines','habitLogs','routineLogs','dailyReviews','reviews']){if((key==='dailyReviews'||key==='projects')&&!data[key]){base[key]=[];continue;}if(!Array.isArray(data[key]))throw new Error(`${key} のデータが不正です。`);if(data[key].length>100000)throw new Error('データ件数が多すぎます。');base[key]=data[key].filter(v=>v&&typeof v==='object'&&!Array.isArray(v));}base.settings={...base.settings,...(data.settings&&typeof data.settings==='object'?data.settings:{})};base.settings.theme=['dark','light'].includes(base.settings.theme)?base.settings.theme:'dark';base.settings.dayBoundaryHour=cap(num(base.settings.dayBoundaryHour,0),0,12);base.settings.reminderTime=/^([01]\d|2[0-3]):[0-5]\d$/.test(base.settings.reminderTime)?base.settings.reminderTime:'20:30';base.settings.focusMinutes=cap(num(base.settings.focusMinutes,25),5,90);base.createdAt=data.createdAt||base.createdAt;return base;}
+  function normalizeData(data){if(!data||typeof data!=='object')throw new Error('データ形式が正しくありません。'); const base=defaultState();for(const key of ['goals','habits','tasks','projects','routines','habitLogs','routineLogs','dailyReviews','reviews','calendarEvents','calendarLogs']){if((key==='dailyReviews'||key==='projects'||key==='calendarEvents'||key==='calendarLogs')&&!data[key]){base[key]=[];continue;}if(!Array.isArray(data[key]))throw new Error(`${key} のデータが不正です。`);if(data[key].length>100000)throw new Error('データ件数が多すぎます。');base[key]=data[key].filter(v=>v&&typeof v==='object'&&!Array.isArray(v));}base.settings={...base.settings,...(data.settings&&typeof data.settings==='object'?data.settings:{})};base.settings.theme=['dark','light'].includes(base.settings.theme)?base.settings.theme:'dark';base.settings.dayBoundaryHour=cap(num(base.settings.dayBoundaryHour,0),0,12);base.settings.reminderTime=/^([01]\d|2[0-3]):[0-5]\d$/.test(base.settings.reminderTime)?base.settings.reminderTime:'20:30';base.settings.focusMinutes=cap(num(base.settings.focusMinutes,25),5,90);base.createdAt=data.createdAt||base.createdAt;return base;}
   async function initialize(){try{database=await openDatabase();const stored=await readDatabase(database);if(stored)state=normalizeData(stored);ui.dataMode='db';}catch(e){console.warn('IndexedDB:',e);try{const stored=localStorage.getItem(STORAGE_FALLBACK_KEY);if(stored)state=normalizeData(JSON.parse(stored));ui.dataMode='local';}catch(err){ui.dataMode='memory';ui.saveWarning=true;}}ui.date=todayKey();ui.calendarMonth=ui.date.slice(0,7);applyTheme();render();if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});}
   function persist(){const snapshot=JSON.parse(JSON.stringify(state));saveQueue=saveQueue.catch(()=>{}).then(async()=>{try{if(ui.dataMode==='db')await writeDatabase(database,snapshot);else if(ui.dataMode==='local')localStorage.setItem(STORAGE_FALLBACK_KEY,JSON.stringify(snapshot));else throw Error('保存先なし');if(ui.saveWarning){ui.saveWarning=false;render();}}catch(err){console.error('Save failed:',err);ui.saveWarning=true;render();}});return saveQueue;}
   function commit(){persist();render();}
@@ -106,6 +181,7 @@
   const getTask = id => state.tasks.find(t=>t.id===id);
   const getProject = id => state.projects.find(p=>p.id===id);
   const getRoutine = id => state.routines.find(r=>r.id===id);
+  const getCalendarEvent = id => state.calendarEvents.find(e=>e.id===id);
   const habitLog = (habitId,date) => state.habitLogs.find(l=>l.habitId===habitId&&l.date===date);
   const routineLog = (routineId,date) => state.routineLogs.find(l=>l.routineId===routineId&&l.date===date);
   const dailyReview = date => state.dailyReviews.find(r=>r.date===date);
@@ -126,20 +202,106 @@
   function statusMeta(log){if(!log)return {label:'未記録',kind:'neutral'};return ({done:{label:'標準量達成',kind:'done'},minimum:{label:'最低量達成',kind:'partial'},partial:{label:'部分実行',kind:'partial'},skipped:{label:'未実行',kind:'skip'},rest:{label:'休息',kind:'neutral'}})[log.status]||{label:'未記録',kind:'neutral'};}
   function navButton(tab,title,icon){return `<button type="button" class="nav-btn ${ui.tab===tab?'active':''}" data-action="tab" data-tab="${tab}">${ico(icon)}<span>${title}</span></button>`;}
   function mobileNavButton(tab,title,icon){return `<button type="button" class="${ui.tab===tab?'active':''}" data-action="tab" data-tab="${tab}" aria-label="${title}">${ico(icon)}<span>${title}</span></button>`;}
-  function render(){const root=document.getElementById('app');if(!root)return;const label=({today:'今日の実行',plan:'行動の設計',goals:'目標を管理',insights:'分析と振り返り',settings:'設定・データ管理'})[ui.tab];root.innerHTML=`<div class="app-shell">
+  function render(){const root=document.getElementById('app');if(!root)return;const label=({today:'今日の実行',calendar:'スケジュール管理',plan:'行動の設計',goals:'目標を管理',insights:'分析と振り返り',settings:'設定・データ管理'})[ui.tab];root.innerHTML=`<div class="app-shell">
    <aside class="sidebar"><div class="brand"><div class="brand-mark">R<span>•</span></div><div><div class="brand-name">RHYTHM</div><div class="brand-tag">YOUR LIFE, BY DESIGN.</div></div></div>
-   <nav class="nav" aria-label="メインナビゲーション">${navButton('today','今日','home')}${navButton('plan','計画・習慣','calendar')}${navButton('goals','目標','target')}${navButton('insights','分析','chart')}${navButton('settings','設定','settings')}</nav>
-   <div class="side-bottom"><div class="sidebar-note">${ico('spark','lg')}<div class="title">行動を、仕組みに。</div><p>意志力に頼らず、今日できる一歩を積み重ねよう。</p></div><div class="sidebar-footer">RHYTHM / LOCAL-FIRST v2.0</div></div></aside>
+   <nav class="nav" aria-label="メインナビゲーション">${navButton('today','今日','home')}${navButton('calendar','カレンダー','calendar')}${navButton('plan','計画・習慣','calendar')}${navButton('goals','目標','target')}${navButton('insights','分析','chart')}${navButton('settings','設定','settings')}</nav>
+   <div class="side-bottom"><div class="sidebar-note">${ico('spark','lg')}<div class="title">行動を、仕組みに。</div><p>意志力に頼らず、今日できる一歩を積み重ねよう。</p></div><div class="sidebar-footer">RHYTHM / LOCAL-FIRST v3.0</div></div></aside>
    <main class="main"><div class="main-inner"><header class="topbar"><div class="topbar-mobile-brand"><div class="brand-mark">R<span>•</span></div><strong>RHYTHM</strong></div><div class="sectionhint">${esc(label)} <span class="low">/ PERSONAL OPERATING SYSTEM</span></div><div class="topbar-right"><span class="today-mark">${esc(formatDate(todayKey()))}</span><button class="btn sm outline" data-action="new" data-kind="quick">${ico('plus','sm')} 追加</button></div></header>${ui.saveWarning?'<div class="notice warn mt18">保存に失敗しました。重要なデータは「設定」からバックアップしてください。</div>':''}<div class="content">${renderTab()}</div><div class="footer-line">SMALL ACTIONS. STRONG SYSTEMS. · RHYTHM</div></div></main>
-   <nav class="mobile-nav" aria-label="モバイルナビゲーション">${mobileNavButton('today','今日','home')}${mobileNavButton('plan','計画','calendar')}${mobileNavButton('goals','目標','target')}${mobileNavButton('insights','分析','chart')}${mobileNavButton('settings','設定','settings')}</nav>
+   <nav class="mobile-nav" aria-label="モバイルナビゲーション">${mobileNavButton('today','今日','home')}${mobileNavButton('calendar','予定','calendar')}${mobileNavButton('plan','計画','calendar')}${mobileNavButton('goals','目標','target')}${mobileNavButton('insights','分析','chart')}${mobileNavButton('settings','設定','settings')}</nav>
    </div>`;renderModal();}
-  function renderTab(){switch(ui.tab){case 'today':return renderToday();case 'plan':return renderPlan();case 'goals':return renderGoals();case 'insights':return renderInsights();case 'settings':return renderSettings();default:return '';}}
+  function renderTab(){switch(ui.tab){case 'today':return renderToday();case 'calendar':return renderCalendar();case 'plan':return renderPlan();case 'goals':return renderGoals();case 'insights':return renderInsights();case 'settings':return renderSettings();default:return '';}}
   function buttonAdd(kind,label='新しく追加'){return `<button class="btn primary" data-action="new" data-kind="${kind}">${ico('plus','sm')}${esc(label)}</button>`;}
   function blank(icon,title,body,action='',label='追加する'){return `<div class="empty"><div class="empty-icon">${ico(icon,'lg')}</div><strong>${esc(title)}</strong><p>${esc(body)}</p>${action?`<button class="btn sm" data-action="new" data-kind="${action}">${ico('plus','sm')}${esc(label)}</button>`:''}</div>`;}
-  function renderToday(){const d=currentKey(),today=todayKey(),isToday=d===today,s=dayStats(d),weekly=periodStats(7),habits=dayHabits(d),routines=dayRoutines(d),tasks=dayTasks(d),dayRev=dailyReview(d),next=habits.find(h=>!habitLog(h.id,d))||null;return `
-    <div class="page-header"><div><div class="eyebrow">YOUR DAILY SYSTEM</div><h1>${isToday?'今日を、設計する。':'過去・予定を確認する。'}</h1><p class="page-sub">${esc(formatDate(d))} <span class="pill neutral">${isToday?'今日':d<today?'過去の記録':'未来の予定'}</span></p></div><div class="page-actions"><div class="day-switch"><button aria-label="前の日" data-action="date-prev">${ico('left','sm')}</button><span class="daytext">${formatShort(d)} (${WEEKDAYS[dateOf(d).getDay()]})</span><button aria-label="次の日" data-action="date-next">${ico('right','sm')}</button></div><button class="btn sm ghost" data-action="date-today">今日</button></div></div>
-    ${state.habits.length===0&&state.tasks.length===0&&state.routines.length===0?renderWelcome():''}
+  // RHYTHM 3.0 — calendar is the single source of truth for time-based plans.
+  const minutes = hhmm => /^([01]\d|2[0-3]):[0-5]\d$/.test(String(hhmm||'')) ? Number(hhmm.slice(0,2))*60+Number(hhmm.slice(3)) : null;
+  const timeLabel = m => `${pad(Math.floor(m/60))}:${pad(m%60)}`;
+  function calendarRepeats(e,key){
+    if(!isKey(key)||!isKey(e.date)||key<e.date||(e.until&&key>e.until)||e.active===false)return false;
+    const d=dateOf(key),day=d.getDay(),repeat=e.repeat||'none';
+    if(repeat==='none')return key===e.date;
+    if(repeat==='daily')return true;
+    if(repeat==='weekdays')return day>=1&&day<=5;
+    if(repeat==='weekly')return day===dateOf(e.date).getDay();
+    if(repeat==='custom')return (e.days||[]).map(Number).includes(day);
+    return false;
+  }
+  function calendarEntries(date){
+    if(!isKey(date))return [];
+    const entries=[];
+    for(const e of state.calendarEvents){
+      if(e.active===false)continue;
+      const overrides=e.overrides&&typeof e.overrides==='object'?e.overrides:{};
+      // The occurrence key remains stable even after moving one instance to another day.
+      if(calendarRepeats(e,date)){
+        const ov=overrides[date]||{};
+        if(!ov.skip&&(!ov.date||ov.date===date))entries.push({event:e,key:date,date,title:ov.title??e.title,startTime:ov.startTime??e.startTime,endTime:ov.endTime??e.endTime,notes:ov.notes??e.notes});
+      }
+      for(const [key,ov] of Object.entries(overrides)){
+        if(!isKey(key)||!ov||ov.skip||ov.date!==date||key===date||!calendarRepeats(e,key))continue;
+        entries.push({event:e,key,date,title:ov.title??e.title,startTime:ov.startTime??e.startTime,endTime:ov.endTime??e.endTime,notes:ov.notes??e.notes});
+      }
+    }
+    return entries.filter(x=>validCalTime(x.startTime,x.endTime)&&typeof x.title==='string').sort((a,b)=>minutes(a.startTime)-minutes(b.startTime)||String(a.title).localeCompare(String(b.title),'ja'));
+  }
+  function calendarDone(entry){
+    const e=entry.event;
+    if(e.linkType==='habit'&&getHabit(e.linkId)){const l=habitLog(e.linkId,entry.date);return !!l&&['done','minimum'].includes(l.status);}
+    if(e.linkType==='task'&&getTask(e.linkId)){const t=getTask(e.linkId);return t.status==='done'&&(!t.doneAt||t.doneAt<=entry.date);}
+    return state.calendarLogs.some(l=>l.eventId===e.id&&l.occurrenceKey===entry.key&&l.status==='done');
+  }
+  function calendarCategoryClass(c){return ({学習:'study',仕事:'work',健康:'health',お金:'money',暮らし:'living',自己成長:'growth',その他:'other'})[c]||'other';}
+  function renderTodayTimeline(date){
+    const entries=calendarEntries(date),now=new Date(),nowMinute=now.getHours()*60+now.getMinutes(),minEntry=entries.length?minutes(entries[0].startTime):null;
+    const first=Math.max(0,Math.min(8*60,minEntry??8*60,nowMinute<7*60?8*60:nowMinute<20*60?nowMinute:8*60));
+    const start=Math.floor(first/60)*60;
+    const last=entries.reduce((max,e)=>Math.max(max,minutes(e.endTime)||0),18*60);
+    const end=Math.min(1440,Math.ceil(Math.max(start+8*60,last+30)/60)*60),span=end-start;
+    const width=Math.max(910,Math.round(span/60*126));
+    const lanes=[];
+    const positioned=entries.map(entry=>{
+      const a=minutes(entry.startTime),b=minutes(entry.endTime);let lane=lanes.findIndex(lastEnd=>lastEnd<=a);
+      if(lane===-1){lane=lanes.length;lanes.push(b);}else lanes[lane]=b;
+      return {...entry,lane,start:a,end:b,done:calendarDone(entry)};
+    });
+    const h=Math.max(112,lanes.length*76+32);
+    const hours=Array.from({length:Math.floor(span/60)+1},(_,i)=>start+i*60).filter(v=>v<=end);
+    const nowInside=nowMinute>=start&&nowMinute<=end;
+    return `<section class="card timeline-section" aria-label="今日のタイムライン">
+      <div class="timeline-header"><div><div class="card-eyebrow">TODAY'S SCHEDULE</div><h2>今日のスケジュール <span class="timeline-count">${entries.filter(calendarDone).length}/${entries.length}完了</span></h2></div><div class="page-actions"><button class="btn sm outline" data-action="new" data-kind="calendar-event">${ico('plus','sm')} 予定を追加</button><button class="btn sm" data-action="tab" data-tab="calendar">${ico('calendar','sm')} カレンダーで管理</button></div></div>
+      ${entries.length?`<div class="timeline-scroll" role="region" aria-label="横スクロールで今日の予定を表示" tabindex="0"><div class="timeline-canvas" style="width:${width}px;--timeline-height:${h}px" data-timeline-start="${start}" data-timeline-span="${span}">
+        <div class="timeline-ticks">${hours.map(v=>`<span class="timeline-tick" style="left:${((v-start)/span*100).toFixed(3)}%">${timeLabel(v)}</span>`).join('')}</div>
+        <div class="timeline-stage" style="height:${h}px">${hours.map(v=>`<div class="timeline-gridline" style="left:${((v-start)/span*100).toFixed(3)}%"></div>`).join('')}
+        ${positioned.map(v=>`<button type="button" class="timeline-event cat-${calendarCategoryClass(v.event.category)} ${v.done?'event-done':''}" style="left:${((v.start-start)/span*100).toFixed(3)}%;width:${((v.end-v.start)/span*100).toFixed(3)}%;top:${v.lane*76+18}px" data-action="calendar-event" data-id="${attr(v.event.id)}" data-key="${attr(v.key)}" aria-label="${attr(v.startTime+'から'+v.endTime+' '+v.title)}"><span class="timeline-event-time">${esc(v.startTime)} – ${esc(v.endTime)} ${v.done?'✓':''}</span><strong>${esc(v.title)}</strong><span class="timeline-event-type">${esc(v.event.category)}${v.event.repeat!=='none'?' · 繰り返し':''}</span></button>`).join('')}
+        ${nowInside?`<div class="timeline-now" style="left:${((nowMinute-start)/span*100).toFixed(3)}%"><span>NOW</span></div>`:''}
+        </div></div></div><p class="timeline-helper">左右にスクロールして予定を確認できます。予定をタップすると編集や完了記録ができます。</p>`:
+      `<div class="timeline-empty">${ico('calendar','lg')}<strong>今日の時間付き予定はありません</strong><p>カレンダーに予定を入れると、ここに時間順で表示されます。習慣はカレンダー上で紐づけられます。</p><button class="btn sm primary" data-action="new" data-kind="calendar-event">最初の予定を作る</button></div>`}</section>`;
+  }
+  function renderCalendar(){
+    const selected=isKey(ui.date)?ui.date:todayKey(),month=isKey(ui.calendarMonth+'-01')?ui.calendarMonth:selected.slice(0,7),weekMode=ui.calendarView==='week';
+    const first=weekMode?startOfWeek(selected):startOfWeek(month+'-01');
+    const lastDay=new Date(Number(month.slice(0,4)),Number(month.slice(5,7)),0).getDate();
+    const last=weekMode?addDays(first,6):addDays(month+'-'+pad(lastDay), (7-(dateOf(month+'-'+pad(lastDay)).getDay()+6)%7-1)%7);
+    const days=Array.from({length:Math.round((dateOf(last)-dateOf(first))/86400000)+1},(_,i)=>addDays(first,i));
+    const entries=calendarEntries(selected),done=entries.filter(calendarDone).length;
+    const grid=days.map(date=>{
+      const list=calendarEntries(date),isToday=date===todayKey(),isSelected=date===selected,outside=date.slice(0,7)!==month;
+      return `<button class="cal-month-day ${outside?'outside':''} ${isToday?'today':''} ${isSelected?'selected':''}" data-action="cal-select" data-date="${date}" aria-label="${formatDate(date,{month:'numeric',day:'numeric',weekday:'short'})}、予定${list.length}件" aria-pressed="${isSelected}"><span class="cal-day-num">${dateOf(date).getDate()} ${isToday?'<small>今日</small>':''}</span><span class="cal-month-events">${list.slice(0,weekMode?3:2).map(x=>`<span class="cal-pill cat-${calendarCategoryClass(x.event.category)}">${esc(x.startTime)} ${esc(x.title)}</span>`).join('')}${list.length>(weekMode?3:2)?`<span class="cal-overflow">+${list.length-(weekMode?3:2)}件</span>`:''}</span>${!list.length?'<span class="cal-empty-dot"></span>':''}</button>`;
+    }).join('');
+    return `<div class="page-header"><div><div class="eyebrow">SCHEDULE MANAGEMENT</div><h1>カレンダー</h1><p class="page-sub">ここで予定を作成・変更。ホームには今日の予定だけが表示されます。</p></div><div class="page-actions"><button class="btn primary" data-action="new" data-kind="calendar-event">${ico('plus','sm')} 予定を追加</button></div></div>
+      <div class="card cal-main"><div class="cal-toolbar"><div class="cal-navigation"><button class="btn sm outline" data-action="cal-prev" aria-label="前の${weekMode?'週':'月'}">${ico('left','sm')}</button><h2>${weekMode?esc(formatShort(first)+' 〜 '+formatShort(last)):`${month.slice(0,4)}年 ${Number(month.slice(5,7))}月`}</h2><button class="btn sm outline" data-action="cal-next" aria-label="次の${weekMode?'週':'月'}">${ico('right','sm')}</button><button class="btn sm ghost" data-action="cal-today">今日</button></div><div class="cal-view-toggle"><button class="${weekMode?'':'active'}" data-action="cal-view" data-view="month">月</button><button class="${weekMode?'active':''}" data-action="cal-view" data-view="week">週</button></div></div><div class="cal-weekhead">${[1,2,3,4,5,6,0].map(day=>`<span>${WEEKDAYS[day]}</span>`).join('')}</div><div class="cal-month-grid ${weekMode?'week-view':''}">${grid}</div></div>
+      <div class="card cal-agenda"><div class="card-header"><div><div class="card-eyebrow">SELECTED DAY</div><h2>${esc(formatDate(selected))} <span class="timeline-count">${done}/${entries.length}完了</span></h2></div><button class="btn sm primary" data-action="cal-add-day" data-date="${selected}">${ico('plus','sm')} この日に追加</button></div>
+      ${entries.length?`<div class="cal-agenda-list">${entries.map(v=>`<div class="cal-agenda-row cat-${calendarCategoryClass(v.event.category)}"><button class="cal-time" data-action="calendar-event" data-id="${attr(v.event.id)}" data-key="${attr(v.key)}">${esc(v.startTime)}<span>${esc(v.endTime)}</span></button><button class="cal-agenda-body" data-action="calendar-event" data-id="${attr(v.event.id)}" data-key="${attr(v.key)}"><strong>${esc(v.title)}</strong><small>${esc(v.event.category)}${v.event.repeat!=='none'?' · 繰り返し':''}${v.event.linkId?' · 習慣/タスク連携':''}</small></button><button class="cal-toggle ${calendarDone(v)?'checked':''}" data-action="cal-toggle" data-id="${attr(v.event.id)}" data-key="${attr(v.key)}" title="${calendarDone(v)?'完了・実績を確認':'完了として記録'}">${ico('check','sm')}</button></div>`).join('')}</div>`:`<div class="cal-agenda-blank">この日に登録された予定はありません。<button data-action="cal-add-day" data-date="${selected}" class="textbtn">予定を追加</button></div>`}
+      <div class="cal-footnote">時間付きの予定はここで管理します。習慣・タスクとの紐づけも可能です。習慣だけを登録しても、自動で時間枠は作られません。</div></div>`;
+  }
+  function validCalTime(start,end){const a=minutes(start),b=minutes(end);return a!==null&&b!==null&&a<b;}
+  function calendarConflicts(entry){const other=calendarEntries(entry.date).filter(v=>v.event.id!==entry.event.id);const a=minutes(entry.startTime),b=minutes(entry.endTime);return other.filter(v=>minutes(v.startTime)<b&&minutes(v.endTime)>a);}
+  function calendarOccurrence(event,key){return calendarEntries(ui.date||todayKey()).find(x=>x.event.id===event.id&&x.key===key)||calendarEntries(todayKey()).find(x=>x.event.id===event.id&&x.key===key)||null;}
+
+  function renderToday(){const d=todayKey(),today=todayKey(),isToday=true,s=dayStats(d),weekly=periodStats(7),habits=dayHabits(d),routines=dayRoutines(d),tasks=dayTasks(d),dayRev=dailyReview(d),next=habits.find(h=>!habitLog(h.id,d))||null;return `
+    <div class="page-header"><div><div class="eyebrow">YOUR DAILY SYSTEM</div><h1>${isToday?'今日を、設計する。':'過去・予定を確認する。'}</h1><p class="page-sub">${esc(formatDate(d))} <span class="pill neutral">${isToday?'今日':d<today?'過去の記録':'未来の予定'}</span></p></div><div class="page-actions"><button class="btn sm outline" data-action="tab" data-tab="calendar">${ico('calendar','sm')} カレンダー</button></div></div>
+    ${state.habits.length===0&&state.tasks.length===0&&state.routines.length===0&&state.calendarEvents.length===0?renderWelcome():''}
     <div class="kpi-grid"><div class="kpi highlight"><div class="caps muted">この日の実行</div><div class="value material">${s.done}<span> / ${s.planned}</span></div><div class="desc">予定した行動の達成数</div></div><div class="kpi"><div class="caps muted">記録した時間</div><div class="value material">${nfmt(s.mins)}<span>分</span></div><div class="desc">「分」で記録した実績</div></div><div class="kpi"><div class="caps muted">直近7日間</div><div class="value material">${weekly.rate===null?'—':weekly.rate+'%'} </div><div class="desc">実行率（休息除く）</div></div></div>
+    ${renderTodayTimeline(d)}
     <div class="grid-main"><div class="stack"><div><div class="today-section"><h2>今日の習慣</h2><span class="count">${habits.length}件</span></div>${habits.length?habits.map(h=>renderHabitCard(h,d)).join(''):blank('repeat','今日の習慣はありません','曜日や実行頻度を設定すると、ここに表示されます。','habit','習慣を登録')}</div>
     <div class="card"><div class="card-header"><span class="card-title">タスク・締切</span><button class="textbtn" data-action="new" data-kind="task">＋ タスク追加</button></div>${tasks.length?`<div class="section-list">${tasks.map(t=>renderTaskRow(t)).join('')}</div>`:blank('check','今日の期限付きタスクはありません','期限のある作業がここに表示されます。')}</div>
     ${routines.length?`<div class="card"><div class="card-header"><span class="card-title">ルーティン</span><button class="textbtn" data-action="tab" data-tab="plan" data-sub="routines">一覧を見る</button></div>${routines.map(r=>renderRoutineRow(r,d)).join('')}</div>`:''}</div>
@@ -148,8 +310,8 @@
     <div class="card"><div class="card-header"><span class="card-title">1日の振り返り</span><span class="pill ${dayRev?'accent':''}">${dayRev?'記録済み':'未記録'}</span></div>${dayRev?`<p style="font-size:12px;line-height:1.8">${esc(dayRev.highlight||'振り返りを記録しました。')}</p><p class="muted mt8" style="font-size:11px">明日の一歩：${esc(dayRev.tomorrow||'未設定')}</p>`:'<p class="muted" style="font-size:12px;line-height:1.8">体力や集中力、できたことを1〜2分で記録しましょう。</p>'}<button class="btn wide mt18" data-action="daily-review" ${d>today?'disabled':''}>${ico('edit','sm')} ${dayRev?'日次レビューを編集':'今日を振り返る'}</button></div>
     <div class="card"><div class="card-header"><span class="card-title">週次レビュー</span>${ico('repeat','sm')}</div><p class="muted" style="font-size:12px;line-height:1.8;margin-bottom:15px">実行率・妨げになったこと・来週の改善策を振り返ります。</p><button class="btn wide" data-action="review">${ico('book','sm')} 今週を振り返る</button></div></div></div>`;}
   function renderWelcome(){return `<div class="welcome" style="margin-bottom:22px"><div class="caps" style="color:#c8ef71">WELCOME TO RHYTHM</div><h2>未来を変えるのは、今日の仕組み。</h2><p>まず1つだけ習慣を登録してみましょう。毎日の実行をチェックすると、記録と分析が自動で積み重なります。</p><div class="chips"><button class="btn primary" data-action="new" data-kind="habit">${ico('plus','sm')} 自分で登録</button><button class="btn" data-action="template" data-template="far">FAR学習の例を追加</button><button class="btn" data-action="template" data-template="words">英単語の例を追加</button></div></div>`;}
-  function renderHabitCard(h,d){const log=habitLog(h.id,d),st=statusMeta(log),isFuture=d>todayKey(),flex=h.frequency==='weekly',completed=log&&['done','minimum'].includes(log.status);return `<article class="habit-card ${completed?'done':''}"><div class="habit-top"><div class="status-square ${st.kind==='done'?'done':st.kind==='partial'?'partial':''}">${ico(st.kind==='done'?'check':st.kind==='partial'?'bolt':h.category==='学習'?'book':'repeat')}</div><div class="habit-body"><div class="habit-name">${esc(h.title)}</div><div class="habit-meta"><span>${esc(h.category||'その他')}</span><span>${flex?`週${nfmt(h.weeklyTarget||3)}回・現在${weeklyHabitDone(h,d)}回`:'標準 '+nfmt(h.normalTarget||1)+esc(h.unit||'回')}</span>${h.cue?`<span>${ico('bolt','sm')}${esc(h.cue)}</span>`:''}</div></div>${flex?'<span class="pill blue">週内で自由</span>':''}</div><div class="habit-actions"><div class="action-left">${!isFuture?`${!log||log.status==='skipped'||log.status==='rest'?`<button class="btn sm primary" data-action="logquick" data-id="${attr(h.id)}" data-amount="standard">${ico('check','sm')} 完了</button><button class="btn sm" data-action="logquick" data-id="${attr(h.id)}" data-amount="minimum">最低ライン</button>`:''}<button class="btn sm ghost" data-action="record" data-id="${attr(h.id)}">${ico('edit','sm')}${log?'編集':'記録'}</button>`:'<span class="muted" style="font-size:11px">実行は当日以降に記録できます</span>'}</div><div class="action-right">${log?`<span class="status-text ${st.kind}">${st.label}${isExecuted(log)?` · ${nfmt(log.amount)}${esc(log.unit||h.unit||'回')}`:''}</span>`:''}<button class="detail-action" aria-label="習慣の設定" data-action="edit" data-kind="habit" data-id="${attr(h.id)}">${ico('more')}</button></div></div></article>`;}
-  function renderTaskRow(t){const done=t.status==='done';return `<div class="task-row"><button class="check-circle ${done?'checked':''}" data-action="tasktoggle" data-id="${attr(t.id)}" aria-label="${done?'完了を取り消す':'完了にする'}">${ico('check','sm')}</button><div class="task-detail"><div class="task-title ${done?'isdone':''}">${esc(t.title)}</div><div class="task-meta">${esc(t.category||'タスク')}${t.projectId&&getProject(t.projectId)?' · '+esc(getProject(t.projectId).title):''} ${t.dueDate?` · ${formatShort(t.dueDate)}`:''} ${!done&&t.dueDate&&t.dueDate<todayKey()?' · 期限超過':''}</div></div><button class="detail-action" data-action="edit" data-kind="task" data-id="${attr(t.id)}" aria-label="タスクを編集">${ico('more')}</button></div>`;}
+  function renderHabitCard(h,d){const log=habitLog(h.id,d),st=statusMeta(log),isFuture=d>todayKey(),flex=h.frequency==='weekly',completed=log&&['done','minimum'].includes(log.status);return `<article class="habit-card ${completed?'done':''}"><div class="habit-top"><div class="status-square ${st.kind==='done'?'done':st.kind==='partial'?'partial':''}">${ico(st.kind==='done'?'check':st.kind==='partial'?'bolt':h.category==='学習'?'book':'repeat')}</div><div class="habit-body"><div class="habit-name">${esc(h.title)}</div><div class="habit-meta"><span>${esc(h.category||'その他')}</span><span>${flex?`週${nfmt(h.weeklyTarget||3)}回・現在${weeklyHabitDone(h,d)}回`:'標準 '+nfmt(h.normalTarget||1)+esc(h.unit||'回')}</span>${h.cue?`<span>${ico('bolt','sm')}${esc(h.cue)}</span>`:''}</div></div>${flex?'<span class="pill blue">週内で自由</span>':''}</div><div class="habit-actions"><div class="action-left">${!isFuture?`${!log||log.status==='skipped'||log.status==='rest'?`<button class="btn sm primary" data-action="logquick" data-id="${attr(h.id)}" data-amount="standard">${ico('check','sm')} 完了</button><button class="btn sm" data-action="logquick" data-id="${attr(h.id)}" data-amount="minimum">最低ライン</button>`:''}<button class="btn sm ghost" data-action="record" data-id="${attr(h.id)}">${ico('edit','sm')}${log?'編集':'記録'}</button>`:'<span class="muted" style="font-size:11px">実行は当日以降に記録できます</span>'}</div><div class="action-right">${log?`<span class="status-text ${st.kind}">${st.label}${isExecuted(log)?` · ${nfmt(log.amount)}${esc(log.unit||h.unit||'回')}`:''}</span>`:''}<button class="detail-action" aria-label="この習慣の予定を作成" title="予定を作成" data-action="cal-link" data-kind="habit" data-id="${attr(h.id)}">${ico('calendar')}</button><button class="detail-action" aria-label="習慣の設定" data-action="edit" data-kind="habit" data-id="${attr(h.id)}">${ico('more')}</button></div></div></article>`;}
+  function renderTaskRow(t){const done=t.status==='done';return `<div class="task-row"><button class="check-circle ${done?'checked':''}" data-action="tasktoggle" data-id="${attr(t.id)}" aria-label="${done?'完了を取り消す':'完了にする'}">${ico('check','sm')}</button><div class="task-detail"><div class="task-title ${done?'isdone':''}">${esc(t.title)}</div><div class="task-meta">${esc(t.category||'タスク')}${t.projectId&&getProject(t.projectId)?' · '+esc(getProject(t.projectId).title):''} ${t.dueDate?` · ${formatShort(t.dueDate)}`:''} ${!done&&t.dueDate&&t.dueDate<todayKey()?' · 期限超過':''}</div></div><button class="detail-action" data-action="cal-link" data-kind="task" data-id="${attr(t.id)}" aria-label="このタスクの予定を作成" title="予定を作成">${ico('calendar')}</button><button class="detail-action" data-action="edit" data-kind="task" data-id="${attr(t.id)}" aria-label="タスクを編集">${ico('more')}</button></div>`;}
   function renderRoutineRow(r,d){const log=routineLog(r.id,d),done=(log?.completed||[]).length,total=(r.steps||[]).length;return `<div class="routine-row"><div class="routine-line"><div><strong style="font-size:13px">${esc(r.title)}</strong><p class="muted" style="font-size:11px;margin-top:5px">${done} / ${total} ステップ完了</p></div><button class="btn sm" data-action="routine-run" data-id="${attr(r.id)}">${ico('check','sm')} チェック</button></div><div class="routine-progress"><span style="width:${total?done/total*100:0}%"></span></div></div>`;}
   function renderWeekMini(end){const ds=rangeDays(end,7);return `<div class="week-mini">${ds.map(d=>{const s=dayStats(d),rate=s.rate;return `<div class="week-day"><small>${WEEKDAYS[dateOf(d).getDay()]}</small><button class="week-dot ${d===todayKey()?'curr':''} ${d>todayKey()?'':rate===100?'perfect':rate>0?'ok':s.planned?'miss':''}" data-action="goto-date" data-date="${d}" title="${formatShort(d)}: ${s.done}/${s.planned}">${dateOf(d).getDate()}</button></div>`;}).join('')}</div>`;}
   function renderPlan(){const sub=ui.planSub;return `<div class="page-header"><div><div class="eyebrow">BUILD YOUR SYSTEM</div><h1>続く仕組みをつくる。</h1><p class="page-sub">行動する条件と量を決めて、毎日の迷いを減らします。</p></div><div class="page-actions">${buttonAdd(sub==='habits'?'habit':sub==='routines'?'routine':sub==='tasks'?'task':sub==='projects'?'project':'habit','新しく追加')}</div></div>
@@ -190,8 +352,31 @@
   function scheduleFields(item={}){const frequency=item.frequency||'daily';return `<div class="field"><label for="frequency">頻度</label><select name="frequency" id="frequency" data-field="frequency"><option value="daily" ${frequency==='daily'?'selected':''}>毎日</option><option value="weekdays" ${frequency==='weekdays'?'selected':''}>平日（月〜金）</option><option value="custom" ${frequency==='custom'?'selected':''}>曜日を指定</option><option value="weekly" ${frequency==='weekly'?'selected':''}>週◯回（曜日自由）</option><option value="monthly" ${frequency==='monthly'?'selected':''}>月1回（指定日）</option></select></div><div class="field" data-freq="custom" ${frequency==='custom'?'':'hidden'}><label>実行する曜日</label><div class="chips">${[1,2,3,4,5,6,0].map(d=>`<label class="day-chip"><input type="checkbox" name="days" value="${d}" ${(item.days||[]).includes(d)?'checked':''}><span>${WEEKDAYS[d]}</span></label>`).join('')}</div></div><div class="field" data-freq="weekly" ${frequency==='weekly'?'':'hidden'}><label for="weeklyTarget">1週間の実行回数</label><input id="weeklyTarget" name="weeklyTarget" type="number" min="1" max="7" value="${cap(num(item.weeklyTarget,3),1,7)}"></div><div class="field" data-freq="monthly" ${frequency==='monthly'?'':'hidden'}><label for="monthDay">毎月の日付</label><input id="monthDay" name="monthDay" type="number" min="1" max="31" value="${cap(num(item.monthDay,1),1,31)}"><p class="help">31日がない月は月末日に実行予定となります。</p></div>`;}
   function wrapModal(title,subtitle,body,footer='',narrow=false){return `<div class="modal-backdrop" data-action="close-backdrop"><div class="modal ${narrow?'narrow':''}" role="dialog" aria-modal="true" aria-label="${attr(title)}"><div class="modal-head"><div><h2>${esc(title)}</h2>${subtitle?`<p>${esc(subtitle)}</p>`:''}</div><button class="modal-close" data-action="close" aria-label="閉じる">${ico('close')}</button></div><div class="modal-content">${body}</div>${footer?`<div class="modal-foot">${footer}</div>`:''}</div></div>`;}
   function footerForm(deleteKind='',id=''){return `<div>${deleteKind&&id?`<button type="button" class="btn sm danger" data-action="delete" data-kind="${attr(deleteKind)}" data-id="${attr(id)}">${ico('trash','sm')} 削除</button>`:''}</div><div class="right"><button type="button" class="btn" data-action="close">キャンセル</button><button type="submit" form="entity-form" class="btn primary">${ico('check','sm')} 保存する</button></div>`;}
-  function renderModal(){const root=document.getElementById('modal-root');const modal=ui.modal;if(!modal){root.innerHTML='';return;}let markup='';const item=modal.id?(({habit:getHabit,goal:getGoal,task:getTask,project:getProject,routine:getRoutine})[modal.kind]?.(modal.id)):null;
-    if(modal.kind==='quick'){markup=wrapModal('何を追加しますか？','使う目的に合わせて選択してください。',`<div class="stack">${[['habit','repeat','習慣を追加','繰り返す行動を習慣化'],['task','check','タスクを追加','1回で終わるやるべきこと'],['project','layers','プロジェクトを追加','複数のタスクをまとめて達成'],['goal','target','目標を追加','成果の指標と期限を決める'],['routine','layers','ルーティンを追加','複数の行動を一つの流れに']].map(([kind,icon,title,sub])=>`<button class="list-card" data-action="new" data-kind="${kind}" style="width:100%;text-align:left;color:var(--text)"><div class="row-left"><div class="list-icon">${ico(icon,'lg')}</div><div class="row-body"><div class="row-title">${title}</div><div class="row-sub">${sub}</div></div></div>${ico('right')}</button>`).join('')}</div>`,'',true);}
+  function renderModal(){const root=document.getElementById('modal-root');const modal=ui.modal;if(!modal){root.innerHTML='';return;}let markup='';const item=modal.id?(({habit:getHabit,goal:getGoal,task:getTask,project:getProject,routine:getRoutine,'calendar-event':getCalendarEvent})[modal.kind]?.(modal.id)):null;
+    if(modal.kind==='quick'){markup=wrapModal('何を追加しますか？','使う目的に合わせて選択してください。',`<div class="stack">${[['calendar-event','calendar','予定を追加','日時・繰り返し・関連する習慣を設定'],['habit','repeat','習慣を追加','繰り返す行動を習慣化'],['task','check','タスクを追加','1回で終わるやるべきこと'],['project','layers','プロジェクトを追加','複数のタスクをまとめて達成'],['goal','target','目標を追加','成果の指標と期限を決める'],['routine','layers','ルーティンを追加','複数の行動を一つの流れに']].map(([kind,icon,title,sub])=>`<button class="list-card" data-action="new" data-kind="${kind}" style="width:100%;text-align:left;color:var(--text)"><div class="row-left"><div class="list-icon">${ico(icon,'lg')}</div><div class="row-body"><div class="row-title">${title}</div><div class="row-sub">${sub}</div></div></div>${ico('right')}</button>`).join('')}</div>`,'',true);}
+    else if(modal.kind==='calendar-event'){
+      const e=item||getCalendarEvent(modal.id),linked=modal.linked||'',fromHabit=linked.startsWith('habit:')?getHabit(linked.slice(6)):null,fromTask=linked.startsWith('task:')?getTask(linked.slice(5)):null;
+      const d=e?.date||modal.date||currentKey(),start=e?.startTime||'19:00',end=e?.endTime||'20:00',sel=e?.linkType&&e.linkId?e.linkType+':'+e.linkId:linked;
+      markup=wrapModal(e?'予定の繰り返し・基本設定を編集':'新しい予定を登録','カレンダーで管理する時間枠を作ります。',`<form id="entity-form" data-form="calendar-event"><div class="field"><label for="title">予定名 *</label><input id="title" name="title" required maxlength="100" placeholder="例：FAR 問題演習" value="${attr(e?.title||fromHabit?.title||fromTask?.title||'')}"></div>
+        <div class="field-grid"><div class="field"><label for="calDate">開始日 *</label><input type="date" id="calDate" name="date" required value="${attr(d)}"></div>${categoryField(e?.category||fromHabit?.category||fromTask?.category||'学習')}</div>
+        <div class="field-grid"><div class="field"><label for="calStart">開始時刻 *</label><input type="time" id="calStart" name="startTime" required value="${attr(start)}"></div><div class="field"><label for="calEnd">終了時刻 *</label><input type="time" id="calEnd" name="endTime" required value="${attr(end)}"></div></div>
+        <div class="field"><label for="calRepeat">繰り返し</label><select id="calRepeat" name="repeat" data-field="calendar-repeat">${[['none','この日だけ'],['daily','毎日'],['weekdays','平日（月〜金）'],['weekly','毎週同じ曜日'],['custom','曜日を指定']].map(([v,l])=>`<option value="${v}" ${v===(e?.repeat||'none')?'selected':''}>${l}</option>`).join('')}</select></div>
+        <div class="field" data-cal-custom ${(e?.repeat||'none')==='custom'?'':'hidden'}><label>繰り返す曜日</label><div class="chips">${[1,2,3,4,5,6,0].map(n=>`<label class="day-chip"><input name="days" value="${n}" type="checkbox" ${(e?.days||[]).includes(n)?'checked':''}><span>${WEEKDAYS[n]}</span></label>`).join('')}</div></div>
+        <div class="field" data-cal-until ${(e?.repeat||'none')==='none'?'hidden':''}><label for="calUntil">繰り返し終了日（任意）</label><input type="date" id="calUntil" name="until" value="${attr(e?.until||'')}"></div>
+        <div class="field"><label for="calLink">習慣・タスクと紐づける（任意）</label><select name="link" id="calLink"><option value="">予定のみ（完了記録はカレンダーで管理）</option>${state.habits.map(h=>`<option value="habit:${attr(h.id)}" ${sel==='habit:'+h.id?'selected':''}>習慣：${esc(h.title)}</option>`).join('')}${state.tasks.map(t=>`<option value="task:${attr(t.id)}" ${sel==='task:'+t.id?'selected':''}>タスク：${esc(t.title)}</option>`).join('')}</select><span class="help">紐づけた場合、実績のチェック状態を連動します。同じ習慣へ複数の時間枠を設定すると、その日の完了状態は共有されます。</span></div>
+        <div class="field"><label for="calNotes">メモ</label><textarea name="notes" id="calNotes" maxlength="2000" placeholder="場所、準備することなど">${esc(e?.notes||'')}</textarea></div><div class="notice">時間枠は同じ日の中で指定してください。繰り返し予定の1日だけ変更したい場合は、カレンダーの該当日から「この回だけ変更」を選びます。</div></form>`,footerForm('calendar-event',e?.id),false);
+    }
+    else if(modal.kind==='calendar-view'){
+      const e=getCalendarEvent(modal.id),key=modal.key||modal.date||todayKey(),date=modal.date||key,v=e?calendarEntries(date).find(x=>x.event.id===e.id&&x.key===key):null;
+      if(!e||!v){ui.modal=null;root.innerHTML='';return;}
+      markup=wrapModal('予定の詳細',formatDate(v.date),`<div class="schedule-detail"><div class="card-eyebrow">${esc(e.category)} ${e.repeat!=='none'?'· 繰り返し予定':''}</div><h2>${esc(v.title)}</h2><div class="detail-time">${ico('clock')} ${esc(v.startTime)} 〜 ${esc(v.endTime)}</div>${v.notes?`<p>${esc(v.notes)}</p>`:''}${e.linkId?`<p class="muted">${e.linkType==='habit'?'習慣':'タスク'}と連動：${esc(e.linkType==='habit'?getHabit(e.linkId)?.title||'紐づけ先なし':getTask(e.linkId)?.title||'紐づけ先なし')}</p>`:''}<span class="pill ${calendarDone(v)?'accent':''}">${calendarDone(v)?'完了済み':'未完了'}</span></div>`, `<div><button class="btn sm danger" data-action="delete" data-kind="calendar-event" data-id="${attr(e.id)}">${ico('trash','sm')} ${e.repeat==='none'?'予定を削除':'全予定を削除'}</button></div><div class="right wrap-right"><button class="btn sm" data-action="cal-toggle" data-id="${attr(e.id)}" data-key="${attr(key)}">${ico('check','sm')} ${calendarDone(v)?'実績を確認':'完了'}</button>${e.repeat!=='none'?`<button class="btn sm" data-action="cal-edit-one" data-id="${attr(e.id)}" data-key="${attr(key)}">この回だけ変更</button>`:''}<button class="btn sm primary" data-action="edit" data-kind="calendar-event" data-id="${attr(e.id)}">${ico('edit','sm')} ${e.repeat==='none'?'編集':'全体を編集'}</button></div>`);
+    }
+    else if(modal.kind==='calendar-occurrence'){
+      const e=getCalendarEvent(modal.id),key=modal.key,ov=e?.overrides?.[key]||{};
+      if(!e||!isKey(key)){ui.modal=null;root.innerHTML='';return;}
+      markup=wrapModal('この回だけ変更',`${formatDate(key)}の予定だけを変更します。`, `<form id="entity-form" data-form="calendar-occurrence"><div class="field"><label>予定名</label><input name="title" maxlength="100" required value="${attr(ov.title??e.title)}"></div><div class="field-grid"><div class="field"><label>移動先の日付</label><input name="date" type="date" required value="${attr(ov.date||key)}"></div><div class="field"><label>元の日付</label><input disabled value="${attr(key)}"></div></div><div class="field-grid"><div class="field"><label>開始時刻</label><input name="startTime" type="time" required value="${attr(ov.startTime??e.startTime)}"></div><div class="field"><label>終了時刻</label><input name="endTime" type="time" required value="${attr(ov.endTime??e.endTime)}"></div></div><div class="field"><label>メモ</label><textarea name="notes" maxlength="2000">${esc(ov.notes??e.notes??'')}</textarea></div><div class="notice">この変更は${esc(formatShort(key))}に発生する1回分だけに適用されます。他の日の繰り返し予定は変わりません。</div></form>`, `<div class="right"><button class="btn sm danger" data-action="cal-skip-one" data-id="${attr(e.id)}" data-key="${attr(key)}">この回を削除</button>${e.overrides?.[key]?`<button class="btn sm" data-action="cal-reset-one" data-id="${attr(e.id)}" data-key="${attr(key)}">変更を戻す</button>`:''}</div><div class="right"><button class="btn sm" data-action="close">閉じる</button><button class="btn sm primary" type="submit" form="entity-form">${ico('check','sm')} 保存</button></div>`);
+    }
+
     else if(modal.kind==='habit')markup=wrapModal(item?'習慣を編集':'新しい習慣','実行する条件と最低ラインを決めます。',`<form id="entity-form" data-form="habit"><div class="field"><label for="title">習慣の名前 *</label><input id="title" name="title" required maxlength="100" placeholder="例：FARの問題演習" value="${attr(item?.title||'')}"></div><div class="field-grid">${categoryField(item?.category||'学習')}${goalField(item?.goalId||'')}</div><div class="form-section"><h3>いつ・どのくらい行う？</h3>${scheduleFields(item||{})}<div class="field-grid"><div class="field"><label for="normalTarget">標準量 *</label><input id="normalTarget" name="normalTarget" type="number" min="0.01" max="1000000" step="any" required value="${attr(item?.normalTarget??60)}"></div><div class="field"><label for="minimumTarget">最低ライン *</label><input id="minimumTarget" name="minimumTarget" type="number" min="0.01" max="1000000" step="any" required value="${attr(item?.minimumTarget??5)}"></div></div><div class="field-grid"><div class="field"><label for="unit">単位</label><select id="unit" name="unit">${['分','問','語','回','ページ','円','件','km','その他'].map(u=>`<option value="${u}" ${u===(item?.unit||'分')?'selected':''}>${u}</option>`).join('')}</select></div><div class="field"><label for="priority">優先度</label><select name="priority" id="priority">${[[3,'高'],[2,'中'],[1,'低']].map(([n,l])=>`<option value="${n}" ${n===num(item?.priority,2)?'selected':''}>${l}</option>`).join('')}</select></div></div></div><div class="form-section"><h3>やる気に頼らない設計</h3><div class="field"><label for="cue">実行のきっかけ（If）</label><input name="cue" id="cue" maxlength="180" placeholder="例：夕食を終えて着替えたら" value="${attr(item?.cue||'')}"><span class="help">「もし〇〇したら、この習慣を始める」と決めます。</span></div><div class="field"><label for="fallback">できないときの代替行動</label><input name="fallback" id="fallback" maxlength="180" placeholder="例：講義ではなく前日の復習を1問" value="${attr(item?.fallback||'')}"></div><div class="field-grid"><div class="field"><label for="startDate">開始日</label><input type="date" name="startDate" id="startDate" value="${attr(item?.startDate||todayKey())}"></div><div class="field"><label for="endDate">終了日（任意）</label><input type="date" name="endDate" id="endDate" value="${attr(item?.endDate||'')}"></div></div>${activeField(item)}<div class="field"><label for="notes">メモ（任意）</label><textarea id="notes" name="notes" maxlength="2000" placeholder="大事にしたい理由、教材など">${esc(item?.notes||'')}</textarea></div></div></form>`,footerForm('habit',item?.id));
     else if(modal.kind==='project')markup=wrapModal(item?'プロジェクトを編集':'新しいプロジェクト','関連タスクをまとめ、進捗を見える化します。',`<form id="entity-form" data-form="project"><div class="field"><label for="title">プロジェクト名 *</label><input id="title" name="title" required maxlength="120" placeholder="例：USCPAの出願手続き" value="${attr(item?.title||'')}"></div><div class="field-grid">${categoryField(item?.category||'学習')}${goalField(item?.goalId||'')}</div><div class="field"><label for="dueDate">目安の期限</label><input type="date" id="dueDate" name="dueDate" value="${attr(item?.dueDate||'')}"></div><div class="field"><label for="notes">完了の条件・メモ</label><textarea id="notes" name="notes" maxlength="2000">${esc(item?.notes||'')}</textarea></div></form>`,footerForm('project',item?.id),true);
     else if(modal.kind==='task')markup=wrapModal(item?'タスクを編集':'タスクを追加','1回限りのやるべきことを整理。',`<form id="entity-form" data-form="task"><div class="field"><label for="title">タスク名 *</label><input name="title" id="title" required maxlength="120" placeholder="例：受験申請の書類を提出" value="${attr(item?.title||'')}"></div><div class="field-grid">${categoryField(item?.category||'仕事')}${goalField(item?.goalId||'')}</div>${projectField(item?.projectId||ui.modal?.projectId||'')}<div class="field-grid"><div class="field"><label for="dueDate">期限</label><input id="dueDate" name="dueDate" type="date" value="${attr(item?.dueDate||todayKey())}"></div><div class="field"><label for="priority">優先度</label><select id="priority" name="priority">${[[3,'高'],[2,'中'],[1,'低']].map(([n,l])=>`<option value="${n}" ${n===num(item?.priority,2)?'selected':''}>${l}</option>`).join('')}</select></div></div><div class="field"><label for="notes">メモ</label><textarea name="notes" id="notes" maxlength="2000">${esc(item?.notes||'')}</textarea></div></form>`,footerForm('task',item?.id),true);
@@ -211,6 +396,31 @@
   function upsertLog(h,amount,forcedStatus=null,reason='',notes=''){const day=currentKey();if(day>todayKey()){toast('未来の日付には実績を記録できません。');return;}const q=num(amount);let status=forcedStatus|| (q>=num(h.normalTarget,1)?'done':q>=num(h.minimumTarget,1)?'minimum':q>0?'partial':'skipped');if(['rest','skipped'].includes(status))amount=0;const old=habitLog(h.id,day);const record={id:old?.id||uid(),habitId:h.id,date:day,amount:num(amount),unit:h.unit||'回',status,reason,notes,updatedAt:new Date().toISOString()};if(old)Object.assign(old,record);else state.habitLogs.push(record);commit();}
   function updatedPausePeriods(previous,nextActive,startDate){const list=Array.isArray(previous?.pausePeriods)?previous.pausePeriods.map(p=>({...p})):[];const wasActive=previous?previous.active!==false:true;if(previous?.active===false&&!list.length)list.push({start:previous.startDate||startDate||todayKey(),end:null});if(wasActive&&!nextActive)list.push({start:todayKey(),end:null});if(!wasActive&&nextActive){const last=list.findLast(p=>!p.end);if(last)last.end=addDays(todayKey(),-1);}return list;}
   function saveForm(form){const kind=form.dataset.form;const fd=new FormData(form);const get=name=>String(fd.get(name)??'').trim();const old=ui.modal?.id;try{
+    if(kind==='calendar-event'){
+      const date=get('date'),start=get('startTime'),end=get('endTime'),repeat=get('repeat'),until=get('until'),days=fd.getAll('days').map(Number),title=get('title');
+      if(!title||!isKey(date))throw Error('予定名と正しい開始日を入力してください。');
+      if(!validCalTime(start,end))throw Error('終了時刻は開始時刻より後に設定してください（同日内）。');
+      if(!['none','daily','weekdays','weekly','custom'].includes(repeat))throw Error('繰り返し設定が不正です。');
+      if(repeat==='custom'&&!days.length)throw Error('曜日を1つ以上選択してください。');
+      if(until&&(!isKey(until)||until<date))throw Error('繰り返し終了日は開始日以降にしてください。');
+      const link=get('link'),[type,...parts]=link?link.split(':'):[''],linkId=parts.join(':');
+      if(link&&!((type==='habit'&&getHabit(linkId))||(type==='task'&&getTask(linkId))))throw Error('連動先が見つかりません。');
+      if(type==='task'&&repeat!=='none')throw Error('単発タスクとの連動は「この日だけ」の予定に設定してください。');
+      const record={title,category:CATEGORIES.includes(get('category'))?get('category'):'その他',date,startTime:start,endTime:end,repeat,days,until:repeat==='none'?'':until,notes:get('notes'),linkType:link?type:'',linkId:link?linkId:'',active:true,updatedAt:new Date().toISOString()};
+      const oldEvent=getCalendarEvent(old);if(oldEvent){Object.assign(oldEvent,record);if(repeat==='none')oldEvent.overrides={};}
+      else state.calendarEvents.push({id:uid(),overrides:{},createdAt:new Date().toISOString(),...record});
+      const target=oldEvent||state.calendarEvents[state.calendarEvents.length-1];
+      closeModal();ui.date=date;ui.calendarMonth=date.slice(0,7);commit();
+      const collisions=calendarConflicts({event:target,date,startTime:start,endTime:end});
+      toast(collisions.length?`保存しました。ほかの予定と${collisions.length}件重複しています。`:'予定を保存しました');return;
+    }else if(kind==='calendar-occurrence'){
+      const e=getCalendarEvent(ui.modal.id),key=ui.modal.key;
+      if(!e||!isKey(key)||!calendarRepeats(e,key))throw Error('対象の予定が見つかりません。');
+      const date=get('date'),startTime=get('startTime'),endTime=get('endTime'),title=get('title');
+      if(!isKey(date)||!title||!validCalTime(startTime,endTime))throw Error('日付または時間帯が正しくありません。');
+      e.overrides=e.overrides||{};e.overrides[key]={date,title,startTime,endTime,notes:get('notes')};
+      closeModal();ui.date=date;ui.calendarMonth=date.slice(0,7);ui.tab='calendar';commit();toast('この回の予定を変更しました');return;
+    }else 
     if(kind==='habit'){
       const normalTarget=num(get('normalTarget')),minimumTarget=num(get('minimumTarget'));
       if(!(normalTarget>0)||!(minimumTarget>0)||minimumTarget>normalTarget)throw Error('最低ラインは0より大きく、標準量以下にしてください。');
@@ -240,12 +450,13 @@
     } else return;
     closeModal();commit();toast('保存しました');
   }catch(err){toast(err.message||'保存できませんでした。');}}
-  function deleteEntity(kind,id){const title=({habit:getHabit,goal:getGoal,task:getTask,project:getProject,routine:getRoutine})[kind]?.(id)?.title||'この項目';if(!window.confirm(`「${title}」を削除しますか？\n関連する記録も削除される場合があります。`))return;
+  function deleteEntity(kind,id){const title=({habit:getHabit,goal:getGoal,task:getTask,project:getProject,routine:getRoutine,'calendar-event':getCalendarEvent})[kind]?.(id)?.title||'この項目';if(!window.confirm(`「${title}」を削除しますか？\n関連する記録も削除される場合があります。`))return;
     if(kind==='habit'){state.habits=state.habits.filter(h=>h.id!==id);state.habitLogs=state.habitLogs.filter(l=>l.habitId!==id);}
     if(kind==='goal'){state.goals=state.goals.filter(g=>g.id!==id);state.habits.forEach(h=>{if(h.goalId===id)h.goalId='';});state.tasks.forEach(t=>{if(t.goalId===id)t.goalId='';});}
     if(kind==='project'){state.projects=state.projects.filter(p=>p.id!==id);state.tasks.forEach(t=>{if(t.projectId===id)t.projectId='';});}
     if(kind==='task')state.tasks=state.tasks.filter(t=>t.id!==id);
     if(kind==='routine'){state.routines=state.routines.filter(r=>r.id!==id);state.routineLogs=state.routineLogs.filter(l=>l.routineId!==id);}
+    if(kind==='calendar-event'){state.calendarEvents=state.calendarEvents.filter(e=>e.id!==id);state.calendarLogs=state.calendarLogs.filter(l=>l.eventId!==id);}
     closeModal();commit();toast('削除しました');}
   function routineStepSet(id,step,all=false){if(currentKey()>todayKey())return;const r=getRoutine(id);if(!r)return;let log=routineLog(id,currentKey());if(!log){log={id:uid(),routineId:id,date:currentKey(),completed:[],updatedAt:new Date().toISOString()};state.routineLogs.push(log);}if(all)log.completed=(r.steps||[]).map(s=>s.id);else log.completed=(log.completed||[]).includes(step)?log.completed.filter(x=>x!==step):[...(log.completed||[]),step];log.updatedAt=new Date().toISOString();persist();render();}
   function seedTemplate(kind){let item;if(kind==='far')item={title:'FAR 問題演習',category:'学習',goalId:'',frequency:'daily',days:[],weeklyTarget:3,monthDay:1,normalTarget:60,minimumTarget:5,unit:'分',cue:'夕食後に机に座ったら',fallback:'前日に間違えた問題を1問復習する',priority:3,startDate:todayKey(),endDate:'',notes:'',active:true};else if(kind==='words')item={title:'USCPA 英単語の復習',category:'学習',goalId:'',frequency:'daily',days:[],weeklyTarget:3,monthDay:1,normalTarget:20,minimumTarget:5,unit:'語',cue:'通勤中に座れたら',fallback:'苦手単語だけ5語見る',priority:2,startDate:todayKey(),endDate:'',notes:'',active:true};if(!item)return;if(state.habits.some(h=>h.title===item.title)){toast('同じ名前の習慣が登録済みです。');return;}state.habits.push({id:uid(),...item,createdAt:new Date().toISOString()});commit();toast('サンプル習慣を追加しました。編集して使えます。');}
@@ -281,10 +492,42 @@ ${summary}
   function exportCsv(){const rows=[['日付','習慣','カテゴリ','状態','実績','単位','理由','メモ'],...state.habitLogs.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(l=>{const h=getHabit(l.habitId);return [l.date,h?.title||'（削除済み）',h?.category||'',statusMeta(l).label,l.amount,l.unit||'',l.reason||'',l.notes||'']})];const quote=v=>'"'+String(v??'').replace(/"/g,'""')+'"';fileDownload(`rhythm-records-${todayKey()}.csv`,'\ufeff'+rows.map(r=>r.map(quote).join(',')).join('\r\n'),'text/csv;charset=utf-8');toast('CSVを書き出しました');}
   const calendarEscape=v=>String(v||'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;');
   function foldIcsLine(value){const encoder=new TextEncoder();let parts=[],piece='',size=0;for(const c of value){const bytes=encoder.encode(c).length;if(size+bytes>73){parts.push(piece);piece=' ';size=1;}piece+=c;size+=bytes;}parts.push(piece);return parts.join('\r\n');}
-  function exportIcs(){const now=new Date(),ts=now.toISOString().replace(/[-:]/g,'').replace(/\..+/,'Z'),hhmm=state.settings.reminderTime||'20:30',hour=Number(hhmm.split(':')[0]),minute=Number(hhmm.split(':')[1]);const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//RHYTHM//Calendar Export 2.0//JA','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:RHYTHM 予定'];let events=0;for(let i=0;i<60;i++){const d=addDays(dateKey(new Date()),i),day=dateOf(d);for(const h of state.habits){if(!isHabitScheduled(h,d))continue;const from=d.replaceAll('-','')+'T'+pad(hour)+pad(minute)+'00',toDate=new Date(day.getFullYear(),day.getMonth(),day.getDate(),hour,minute+Math.max(5,Math.min(240,h.unit==='分'?num(h.normalTarget,25):25))),to=dateKey(toDate).replaceAll('-','')+'T'+pad(toDate.getHours())+pad(toDate.getMinutes())+'00';lines.push('BEGIN:VEVENT',`UID:rhythm-${h.id}-${d}@rhythm.local`,`DTSTAMP:${ts}`,`DTSTART:${from}`,`DTEND:${to}`,`SUMMARY:${calendarEscape(h.title)}`,`DESCRIPTION:${calendarEscape('標準 '+h.normalTarget+h.unit+' / 最低 '+h.minimumTarget+h.unit+' / きっかけ '+(h.cue||'未設定'))}`,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:RHYTHM 習慣の時間','TRIGGER:-PT5M','END:VALARM','END:VEVENT');events++;}for(const t of state.tasks){if(t.status==='done'||t.dueDate!==d)continue;const from=d.replaceAll('-','')+'T'+pad(hour)+pad(minute)+'00',to=d.replaceAll('-','')+'T'+pad(hour)+pad((minute+15)%60)+'00';const endObj=new Date(day.getFullYear(),day.getMonth(),day.getDate(),hour,minute+15);lines.push('BEGIN:VEVENT',`UID:rhythm-task-${t.id}-${d}@rhythm.local`,`DTSTAMP:${ts}`,`DTSTART:${from}`,`DTEND:${dateKey(endObj).replaceAll('-','')}T${pad(endObj.getHours())}${pad(endObj.getMinutes())}00`,`SUMMARY:${calendarEscape('期限: '+t.title)}`,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:期限の確認','TRIGGER:-PT5M','END:VALARM','END:VEVENT');events++;}}
-    lines.push('END:VCALENDAR');if(!events){toast('出力する予定がありません');return;}fileDownload(`rhythm-calendar-${todayKey()}.ics`,lines.map(foldIcsLine).join('\r\n')+'\r\n','text/calendar;charset=utf-8');toast(`${events}件の予定を書き出しました`);}
+  function exportIcs(){
+    const now=new Date(),ts=now.toISOString().replace(/[-:]/g,'').replace(/\..+/,'Z'),hhmm=state.settings.reminderTime||'20:30';
+    const hour=Number(hhmm.split(':')[0]),minute=Number(hhmm.split(':')[1]);
+    const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//RHYTHM//Calendar Export 3.0//JA','CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:RHYTHM 予定'];
+    let events=0;
+    const pushEvent=(id,from,to,title,description)=>{
+      lines.push('BEGIN:VEVENT',`UID:${id}@rhythm.local`,`DTSTAMP:${ts}`,`DTSTART:${from}`,`DTEND:${to}`,`SUMMARY:${calendarEscape(title)}`,`DESCRIPTION:${calendarEscape(description)}`,
+        'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:RHYTHMの予定','TRIGGER:-PT5M','END:VALARM','END:VEVENT');events++;
+    };
+    for(let i=0;i<60;i++){
+      const d=addDays(dateKey(new Date()),i),day=dateOf(d),datePart=d.replaceAll('-','');
+      const entries=calendarEntries(d);
+      for(const entry of entries){
+        if(!validCalTime(entry.startTime,entry.endTime))continue;
+        pushEvent(`rhythm-schedule-${entry.event.id}-${entry.key}`,`${datePart}T${entry.startTime.replace(':','')}00`,`${datePart}T${entry.endTime.replace(':','')}00`,entry.title,entry.notes||'RHYTHMで管理した予定');
+      }
+      const habitLinks=new Set(entries.filter(x=>x.event.linkType==='habit').map(x=>x.event.linkId));
+      const taskLinks=new Set(entries.filter(x=>x.event.linkType==='task').map(x=>x.event.linkId));
+      for(const h of state.habits){
+        if(!isHabitScheduled(h,d)||habitLinks.has(h.id))continue;
+        const from=`${datePart}T${pad(hour)}${pad(minute)}00`,end=new Date(day.getFullYear(),day.getMonth(),day.getDate(),hour,minute+Math.max(5,Math.min(240,h.unit==='分'?num(h.normalTarget,25):25)));
+        pushEvent(`rhythm-habit-${h.id}-${d}`,from,`${dateKey(end).replaceAll('-','')}T${pad(end.getHours())}${pad(end.getMinutes())}00`,h.title,`標準 ${h.normalTarget}${h.unit||''} / 最低 ${h.minimumTarget}${h.unit||''}`);
+      }
+      for(const t of state.tasks){
+        if(t.status==='done'||t.dueDate!==d||taskLinks.has(t.id))continue;
+        const end=new Date(day.getFullYear(),day.getMonth(),day.getDate(),hour,minute+15);
+        pushEvent(`rhythm-task-${t.id}-${d}`,`${datePart}T${pad(hour)}${pad(minute)}00`,`${dateKey(end).replaceAll('-','')}T${pad(end.getHours())}${pad(end.getMinutes())}00`,'期限: '+t.title,t.notes||'RHYTHMのタスク');
+      }
+    }
+    lines.push('END:VCALENDAR');
+    if(!events){toast('出力する予定がありません');return;}
+    fileDownload(`rhythm-calendar-${todayKey()}.ics`,lines.map(foldIcsLine).join('\r\n')+'\r\n','text/calendar;charset=utf-8');toast(`${events}件の予定を書き出しました`);
+  }
+
   function seedStarter(kind){const defs={study:{title:'FAR 問題演習',category:'学習',frequency:'weekdays',normalTarget:60,minimumTarget:5,unit:'分',cue:'帰宅後、机に座ったら',fallback:'前日の間違いを1問解く'},vocab:{title:'英単語の復習',category:'学習',frequency:'daily',normalTarget:20,minimumTarget:5,unit:'語',cue:'移動中に座れたら',fallback:'苦手な5語だけ復習する'},fitness:{title:'筋トレ',category:'健康',frequency:'custom',days:[1,3,5],normalTarget:30,minimumTarget:5,unit:'分',cue:'帰宅して着替えたら',fallback:'スクワットを5分行う'},finance:{title:'週1回の家計確認',category:'お金',frequency:'custom',days:[0],normalTarget:15,minimumTarget:5,unit:'分',cue:'日曜日の夕食後に',fallback:'今週のカード利用額だけ確認する'},reset:{title:'就寝前のリセット',category:'暮らし',frequency:'daily',normalTarget:5,minimumTarget:1,unit:'分',cue:'歯磨きが終わったら',fallback:'明日の最重要行動を1つ書く'}};const item=defs[kind];if(!item)return;if(state.habits.some(h=>h.title===item.title)){toast('同じ名前の習慣が登録済みです');return;}state.habits.push({id:uid(),goalId:'',days:[],weeklyTarget:3,monthDay:1,priority:2,startDate:todayKey(),endDate:'',notes:'',active:true,createdAt:new Date().toISOString(),...item});commit();toast('テンプレートを追加しました');}
-  function mergeStates(current,incoming){const out=JSON.parse(JSON.stringify(current));for(const key of ['goals','habits','tasks','projects','routines','habitLogs','routineLogs','dailyReviews','reviews']){const arr=out[key]||[];const ids=new Set(arr.map(x=>x.id).filter(Boolean));const keys=new Set(arr.map(x=>key==='habitLogs'?`${x.habitId}:${x.date}`:key==='routineLogs'?`${x.routineId}:${x.date}`:key==='dailyReviews'?x.date:key==='reviews'?x.weekStart:'').filter(Boolean));for(const entry of incoming[key]){const subkey=key==='habitLogs'?`${entry.habitId}:${entry.date}`:key==='routineLogs'?`${entry.routineId}:${entry.date}`:key==='dailyReviews'?entry.date:key==='reviews'?entry.weekStart:'';if((entry.id&&ids.has(entry.id))||(subkey&&keys.has(subkey)))continue;arr.push(entry);if(entry.id)ids.add(entry.id);if(subkey)keys.add(subkey);}out[key]=arr;}return normalizeData(out);}
+  function mergeStates(current,incoming){const out=JSON.parse(JSON.stringify(current));for(const key of ['goals','habits','tasks','projects','routines','habitLogs','routineLogs','dailyReviews','reviews','calendarEvents','calendarLogs']){const arr=out[key]||[];const ids=new Set(arr.map(x=>x.id).filter(Boolean));const keys=new Set(arr.map(x=>key==='habitLogs'?`${x.habitId}:${x.date}`:key==='routineLogs'?`${x.routineId}:${x.date}`:key==='dailyReviews'?x.date:key==='reviews'?x.weekStart:key==='calendarLogs'?`${x.eventId}:${x.occurrenceKey}`:'').filter(Boolean));for(const entry of incoming[key]){const subkey=key==='habitLogs'?`${entry.habitId}:${entry.date}`:key==='routineLogs'?`${entry.routineId}:${entry.date}`:key==='dailyReviews'?entry.date:key==='reviews'?entry.weekStart:key==='calendarLogs'?`${entry.eventId}:${entry.occurrenceKey}`:'';if((entry.id&&ids.has(entry.id))||(subkey&&keys.has(subkey)))continue;arr.push(entry);if(entry.id)ids.add(entry.id);if(subkey)keys.add(subkey);}out[key]=arr;}return normalizeData(out);}
   async function createRecoverySnapshot(){try{if(ui.dataMode==='db'&&database){await writeKey(database,'recovery',JSON.parse(JSON.stringify(state)));}else if(ui.dataMode==='local')localStorage.setItem('rhythm-recovery-v2',JSON.stringify(state));}catch(e){console.warn('Recovery snapshot:',e);}}
   function writeKey(db,key,doc){return new Promise((resolve,reject)=>{const tx=db.transaction(DB_STORE,'readwrite');tx.objectStore(DB_STORE).put(doc,key);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}
   async function restoreRecoverySnapshot(){try{let backup=null;if(ui.dataMode==='db'&&database){const tx=database.transaction(DB_STORE,'readonly');backup=await new Promise((resolve,reject)=>{const req=tx.objectStore(DB_STORE).get('recovery');req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);});}else if(ui.dataMode==='local')backup=JSON.parse(localStorage.getItem('rhythm-recovery-v2')||'null');if(!backup){toast('復旧用スナップショットがありません');return;}if(!window.confirm('直前の状態に戻します。現在のデータは置き換えられます。続けますか？'))return;state=normalizeData(backup);applyTheme();await persist();render();toast('直前の状態に復元しました');}catch(e){toast('復元に失敗しました');}}
@@ -293,6 +536,51 @@ ${summary}
   async function resetData(){if(!window.confirm('RHYTHMのすべての記録を削除します。バックアップがない場合は戻せません。続行しますか？'))return;if(!window.confirm('本当に全データを初期化しますか？'))return;await createRecoverySnapshot();state=defaultState();applyTheme();ui.date=todayKey();await persist();ui.tab='today';render();toast('初期化しました');}
   function setTab(tab,sub){ui.tab=tab;if(sub)ui.planSub=sub;ui.modal=null;render();window.scrollTo({top:0,behavior:'instant'});}
   document.addEventListener('click',event=>{const btn=event.target.closest('[data-action]');if(!btn)return;const action=btn.dataset.action,id=btn.dataset.id,kind=btn.dataset.kind;
+    if(action==='cal-select'){ui.date=btn.dataset.date;ui.calendarMonth=ui.date.slice(0,7);render();return;}
+    if(action==='cal-today'){ui.date=todayKey();ui.calendarMonth=ui.date.slice(0,7);render();return;}
+    if(action==='cal-prev'||action==='cal-next'){
+      const amount=action==='cal-prev'?-1:1;
+      if(ui.calendarView==='week'){ui.date=addDays(ui.date||todayKey(),amount*7);ui.calendarMonth=ui.date.slice(0,7);}
+      else {const [year,month]=String(ui.calendarMonth||todayKey().slice(0,7)).split('-').map(Number);const next=new Date(year,month-1+amount,1,12);ui.calendarMonth=dateKey(next).slice(0,7);ui.date=ui.calendarMonth+'-01';}
+      render();return;
+    }
+    if(action==='cal-view'){ui.calendarView=btn.dataset.view==='week'?'week':'month';ui.calendarMonth=(ui.date||todayKey()).slice(0,7);render();return;}
+    if(action==='cal-add-day'){ui.date=btn.dataset.date;openModal('calendar-event',null,{date:ui.date});return;}
+    if(action==='cal-link'){
+      const h=kind==='habit'?getHabit(id):null,t=kind==='task'?getTask(id):null;
+      if(!h&&!t)return;
+      openModal('calendar-event',null,{linked:kind+':'+id,date:ui.tab==='today'?todayKey():currentKey()});return;
+    }
+    if(action==='calendar-event'){
+      const key=btn.dataset.key,date=ui.tab==='today'?todayKey():ui.date||todayKey();
+      openModal('calendar-view',id,{key,date});return;
+    }
+    if(action==='cal-edit-one'){openModal('calendar-occurrence',id,{key:btn.dataset.key});return;}
+    if(action==='cal-skip-one'||action==='cal-reset-one'){
+      const e=getCalendarEvent(id),key=btn.dataset.key;if(!e||!isKey(key))return;
+      if(action==='cal-skip-one'&&!window.confirm('この日の予定だけを削除しますか？ほかの繰り返し予定は残ります。'))return;
+      e.overrides=e.overrides||{};
+      if(action==='cal-skip-one')e.overrides[key]={skip:true};else delete e.overrides[key];
+      closeModal();commit();toast(action==='cal-skip-one'?'この回だけ削除しました':'この回の変更を戻しました');return;
+    }
+    if(action==='cal-toggle'){
+      const e=getCalendarEvent(id),key=btn.dataset.key,date=ui.tab==='today'?todayKey():ui.date||todayKey();
+      const entry=calendarEntries(date).find(v=>v.event.id===id&&v.key===key);
+      if(!e||!entry)return;
+      if(entry.date>todayKey()){toast('未来の予定は完了できません');return;}
+      if(e.linkType==='habit'&&getHabit(e.linkId)){
+        if(calendarDone(entry)){ui.date=entry.date;openModal('record',e.linkId);return;}
+        ui.date=entry.date;closeModal();upsertLog(getHabit(e.linkId),num(getHabit(e.linkId).normalTarget,1));toast('習慣の実績と連動しました');return;
+      }
+      if(e.linkType==='task'&&getTask(e.linkId)){
+        const task=getTask(e.linkId);task.status=task.status==='done'?'todo':'done';task.doneAt=task.status==='done'?entry.date:'';closeModal();commit();toast('タスクと連動しました');return;
+      }
+      const previous=state.calendarLogs.find(l=>l.eventId===id&&l.occurrenceKey===key);
+      if(previous){previous.status=previous.status==='done'?'todo':'done';previous.updatedAt=new Date().toISOString();}
+      else state.calendarLogs.push({id:uid(),eventId:id,occurrenceKey:key,status:'done',updatedAt:new Date().toISOString()});
+      closeModal();commit();toast('予定の完了状態を更新しました');return;
+    }
+
     if(action==='close-backdrop'){if(event.target===btn)closeModal();return;}
     if(action==='close'){closeModal();return;}
     if(action==='tab'){setTab(btn.dataset.tab,btn.dataset.sub);return;}
@@ -317,9 +605,9 @@ ${summary}
     if(action==='ai-copy'){copyAIText();return;}
     if(action==='ai-import'){openModal('ai-import');return;}
     if(action==='range'){ui.insightRange=num(btn.dataset.range,7);render();return;}
-    if(action==='date-prev'||action==='date-next'){ui.date=addDays(currentKey(),action==='date-prev'?-1:1);render();return;}
+    if(action==='date-prev'||action==='date-next'){ui.date=addDays(currentKey(),action==='date-prev'?-1:1);ui.calendarMonth=ui.date.slice(0,7);setTab('calendar');return;}
     if(action==='date-today'){ui.date=todayKey();render();return;}
-    if(action==='goto-date'){ui.date=btn.dataset.date;setTab('today');return;}
+    if(action==='goto-date'){ui.date=btn.dataset.date;ui.calendarMonth=ui.date.slice(0,7);setTab('calendar');return;}
     if(action==='week-prev'||action==='week-next'){ui.date=addDays(currentKey(),action==='week-prev'?-7:7);render();return;}
     if(action==='theme'){state.settings.theme=btn.dataset.theme;applyTheme();commit();return;}
     if(action==='focus-start'){focusStart();return;}
@@ -340,6 +628,7 @@ ${summary}
     if(target.dataset.setting==='reminder-time'){if(/^([01]\d|2[0-3]):[0-5]\d$/.test(target.value)){state.settings.reminderTime=target.value;commit();toast('リマインド時刻を保存しました');}return;}
     if(target.dataset.setting==='cutover'){state.settings.dayBoundaryHour=cap(num(target.value,4),0,6);ui.date=todayKey();commit();toast('1日の区切りを変更しました');return;}
     if(target.dataset.field==='frequency'){const form=target.closest('form');form?.querySelectorAll('[data-freq]').forEach(el=>el.hidden=el.dataset.freq!==target.value);return;}
+    if(target.dataset.field==='calendar-repeat'){const form=target.closest('form');const custom=form?.querySelector('[data-cal-custom]'),until=form?.querySelector('[data-cal-until]');if(custom)custom.hidden=target.value!=='custom';if(until)until.hidden=target.value==='none';return;}
   });
   document.addEventListener('submit',event=>{if(event.target.id==='entity-form'){event.preventDefault();saveForm(event.target);}});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&ui.modal)closeModal();});
