@@ -1,0 +1,19 @@
+{
+  "name": "RHYTHM — 習慣・仕組み化システム",
+  "short_name": "RHYTHM",
+  "description": "目標を毎日の行動に。習慣と目標の管理アプリ",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101315",
+  "theme_color": "#101315",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
