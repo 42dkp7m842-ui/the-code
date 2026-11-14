@@ -110,6 +110,47 @@
 @media(max-width:390px){.mobile-nav button{font-size:8px}.mobile-nav .ico{width:18px;height:18px}.cal-pill{max-height:20px;overflow:hidden}.cal-month-day{min-height:70px}.cal-navigation h2{font-size:15px;min-width:100px}}
 
 </style>
+  <style>
+/* RHYTHM — Yukari Kono-inspired Manager/Executor extension */
+.ko-dashboard{display:grid;gap:17px;margin-bottom:20px}
+.ko-card{border:1px solid var(--border);border-radius:18px;background:var(--surface);padding:20px;margin-bottom:18px;display:grid;gap:15px;min-width:0}
+.ko-hero{background:linear-gradient(115deg,var(--surface),var(--surface2));border-color:var(--border)}
+.ko-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ko-heading h2{font-size:19px;margin-top:7px;line-height:1.5}
+.ko-kicker{font-size:10px;font-weight:850;letter-spacing:.12em;color:var(--accent)}
+.ko-pill{font-size:11px;padding:6px 10px;border-radius:99px;background:var(--surface3);color:var(--muted);white-space:nowrap}
+.ko-pill.ko-ok{background:var(--accentsoft);color:var(--accent)}
+.ko-two,.ko-2cols{display:grid;grid-template-columns:1.6fr 1fr;gap:15px}
+.ko-aim{font-size:16px;line-height:1.7;font-weight:770;overflow-wrap:anywhere;margin-top:4px}
+.ko-label{font-size:11px;color:var(--muted)}
+.ko-muted{color:var(--muted);font-size:11px;line-height:1.8;margin-top:5px}
+.ko-small{font-size:11px;color:var(--muted);line-height:1.6}
+.ko-progress{padding:13px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;align-self:start}
+.ko-large{font-size:27px;font-weight:800;color:var(--text);margin-top:6px;font-variant-numeric:tabular-nums}
+.ko-large span{font-size:15px;color:var(--muted)}
+.ko-meter{height:8px;background:var(--surface3);border-radius:30px;overflow:hidden}
+.ko-meter>span{height:100%;display:block;border-radius:30px;background:var(--accent)}
+.ko-good{color:var(--accent)}.ko-warn{color:var(--amber);font-size:11px;font-weight:730}
+.ko-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ko-next{border-top:1px solid var(--border);padding-top:13px;color:var(--muted);font-size:11px;line-height:1.7}
+.ko-next strong{color:var(--text)}
+.ko-fields{display:grid;gap:12px}
+.ko-fields label,.ko-week-form label{display:grid;gap:7px;font-size:11px;font-weight:680;color:var(--muted)}
+.ko-fields input,.ko-fields select,.ko-week-form input{width:100%;padding:11px 12px;font-size:13px;min-width:0}
+.ko-fields .ko-check{display:flex;align-items:center;gap:10px;color:var(--text);font-size:12px;line-height:1.7}
+.ko-check input{width:auto;flex:none}
+.ko-review{border-top:1px solid var(--border);padding-top:12px}
+.ko-review summary{cursor:pointer;font-size:12px;font-weight:740;line-height:1.8}
+.ko-review form{padding-top:13px}
+.ko-week-form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+.ko-weekdays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}
+.ko-daychip{border:1px solid var(--border);background:var(--surface2);border-radius:10px;padding:10px 6px;color:var(--text);display:flex;flex-direction:column;gap:6px;text-align:center;min-width:0}
+.ko-daychip strong{font-size:11px}.ko-daychip span,.ko-daychip small{font-size:9px;color:var(--muted);line-height:1.5}
+.ko-daychip.ko-selected{border-color:var(--accent);background:var(--accentsoft)}
+@media(max-width:820px){.ko-week-form{grid-template-columns:1fr 1fr}.ko-week-form button{grid-column:1/-1}.ko-weekdays{overflow-x:auto;grid-template-columns:repeat(7,minmax(90px,1fr));padding-bottom:5px}}
+@media(max-width:560px){.ko-card{padding:15px;gap:13px}.ko-two,.ko-2cols,.ko-week-form{grid-template-columns:1fr}.ko-week-form button{grid-column:auto}.ko-heading h2{font-size:17px}.ko-aim{font-size:14px}.ko-progress{display:flex;align-items:center;gap:12px}.ko-large{font-size:22px}}
+
+</style>
   <script>
 /* RHYTHM — local-first habit, goal and task system. No external dependencies. */
 (() => {
@@ -205,7 +246,7 @@
   function render(){const root=document.getElementById('app');if(!root)return;const label=({today:'今日の実行',calendar:'スケジュール管理',plan:'行動の設計',goals:'目標を管理',insights:'分析と振り返り',settings:'設定・データ管理'})[ui.tab];root.innerHTML=`<div class="app-shell">
    <aside class="sidebar"><div class="brand"><div class="brand-mark">R<span>•</span></div><div><div class="brand-name">RHYTHM</div><div class="brand-tag">YOUR LIFE, BY DESIGN.</div></div></div>
    <nav class="nav" aria-label="メインナビゲーション">${navButton('today','今日','home')}${navButton('calendar','カレンダー','calendar')}${navButton('plan','計画・習慣','calendar')}${navButton('goals','目標','target')}${navButton('insights','分析','chart')}${navButton('settings','設定','settings')}</nav>
-   <div class="side-bottom"><div class="sidebar-note">${ico('spark','lg')}<div class="title">行動を、仕組みに。</div><p>意志力に頼らず、今日できる一歩を積み重ねよう。</p></div><div class="sidebar-footer">RHYTHM / LOCAL-FIRST v3.0</div></div></aside>
+   <div class="side-bottom"><div class="sidebar-note">${ico('spark','lg')}<div class="title">行動を、仕組みに。</div><p>意志力に頼らず、今日できる一歩を積み重ねよう。</p></div><div class="sidebar-footer">RHYTHM / LOCAL-FIRST v3.1</div></div></aside>
    <main class="main"><div class="main-inner"><header class="topbar"><div class="topbar-mobile-brand"><div class="brand-mark">R<span>•</span></div><strong>RHYTHM</strong></div><div class="sectionhint">${esc(label)} <span class="low">/ PERSONAL OPERATING SYSTEM</span></div><div class="topbar-right"><span class="today-mark">${esc(formatDate(todayKey()))}</span><button class="btn sm outline" data-action="new" data-kind="quick">${ico('plus','sm')} 追加</button></div></header>${ui.saveWarning?'<div class="notice warn mt18">保存に失敗しました。重要なデータは「設定」からバックアップしてください。</div>':''}<div class="content">${renderTab()}</div><div class="footer-line">SMALL ACTIONS. STRONG SYSTEMS. · RHYTHM</div></div></main>
    <nav class="mobile-nav" aria-label="モバイルナビゲーション">${mobileNavButton('today','今日','home')}${mobileNavButton('calendar','予定','calendar')}${mobileNavButton('plan','計画','calendar')}${mobileNavButton('goals','目標','target')}${mobileNavButton('insights','分析','chart')}${mobileNavButton('settings','設定','settings')}</nav>
    </div>`;renderModal();}
@@ -288,6 +329,7 @@
       return `<button class="cal-month-day ${outside?'outside':''} ${isToday?'today':''} ${isSelected?'selected':''}" data-action="cal-select" data-date="${date}" aria-label="${formatDate(date,{month:'numeric',day:'numeric',weekday:'short'})}、予定${list.length}件" aria-pressed="${isSelected}"><span class="cal-day-num">${dateOf(date).getDate()} ${isToday?'<small>今日</small>':''}</span><span class="cal-month-events">${list.slice(0,weekMode?3:2).map(x=>`<span class="cal-pill cat-${calendarCategoryClass(x.event.category)}">${esc(x.startTime)} ${esc(x.title)}</span>`).join('')}${list.length>(weekMode?3:2)?`<span class="cal-overflow">+${list.length-(weekMode?3:2)}件</span>`:''}</span>${!list.length?'<span class="cal-empty-dot"></span>':''}</button>`;
     }).join('');
     return `<div class="page-header"><div><div class="eyebrow">SCHEDULE MANAGEMENT</div><h1>カレンダー</h1><p class="page-sub">ここで予定を作成・変更。ホームには今日の予定だけが表示されます。</p></div><div class="page-actions"><button class="btn primary" data-action="new" data-kind="calendar-event">${ico('plus','sm')} 予定を追加</button></div></div>
+      ${window.RHYTHM_KONO?.calendar?.(selected)||''}
       <div class="card cal-main"><div class="cal-toolbar"><div class="cal-navigation"><button class="btn sm outline" data-action="cal-prev" aria-label="前の${weekMode?'週':'月'}">${ico('left','sm')}</button><h2>${weekMode?esc(formatShort(first)+' 〜 '+formatShort(last)):`${month.slice(0,4)}年 ${Number(month.slice(5,7))}月`}</h2><button class="btn sm outline" data-action="cal-next" aria-label="次の${weekMode?'週':'月'}">${ico('right','sm')}</button><button class="btn sm ghost" data-action="cal-today">今日</button></div><div class="cal-view-toggle"><button class="${weekMode?'':'active'}" data-action="cal-view" data-view="month">月</button><button class="${weekMode?'active':''}" data-action="cal-view" data-view="week">週</button></div></div><div class="cal-weekhead">${[1,2,3,4,5,6,0].map(day=>`<span>${WEEKDAYS[day]}</span>`).join('')}</div><div class="cal-month-grid ${weekMode?'week-view':''}">${grid}</div></div>
       <div class="card cal-agenda"><div class="card-header"><div><div class="card-eyebrow">SELECTED DAY</div><h2>${esc(formatDate(selected))} <span class="timeline-count">${done}/${entries.length}完了</span></h2></div><button class="btn sm primary" data-action="cal-add-day" data-date="${selected}">${ico('plus','sm')} この日に追加</button></div>
       ${entries.length?`<div class="cal-agenda-list">${entries.map(v=>`<div class="cal-agenda-row cat-${calendarCategoryClass(v.event.category)}"><button class="cal-time" data-action="calendar-event" data-id="${attr(v.event.id)}" data-key="${attr(v.key)}">${esc(v.startTime)}<span>${esc(v.endTime)}</span></button><button class="cal-agenda-body" data-action="calendar-event" data-id="${attr(v.event.id)}" data-key="${attr(v.key)}"><strong>${esc(v.title)}</strong><small>${esc(v.event.category)}${v.event.repeat!=='none'?' · 繰り返し':''}${v.event.linkId?' · 習慣/タスク連携':''}</small></button><button class="cal-toggle ${calendarDone(v)?'checked':''}" data-action="cal-toggle" data-id="${attr(v.event.id)}" data-key="${attr(v.key)}" title="${calendarDone(v)?'完了・実績を確認':'完了として記録'}">${ico('check','sm')}</button></div>`).join('')}</div>`:`<div class="cal-agenda-blank">この日に登録された予定はありません。<button data-action="cal-add-day" data-date="${selected}" class="textbtn">予定を追加</button></div>`}
@@ -301,6 +343,7 @@
     <div class="page-header"><div><div class="eyebrow">YOUR DAILY SYSTEM</div><h1>${isToday?'今日を、設計する。':'過去・予定を確認する。'}</h1><p class="page-sub">${esc(formatDate(d))} <span class="pill neutral">${isToday?'今日':d<today?'過去の記録':'未来の予定'}</span></p></div><div class="page-actions"><button class="btn sm outline" data-action="tab" data-tab="calendar">${ico('calendar','sm')} カレンダー</button></div></div>
     ${state.habits.length===0&&state.tasks.length===0&&state.routines.length===0&&state.calendarEvents.length===0?renderWelcome():''}
     <div class="kpi-grid"><div class="kpi highlight"><div class="caps muted">この日の実行</div><div class="value material">${s.done}<span> / ${s.planned}</span></div><div class="desc">予定した行動の達成数</div></div><div class="kpi"><div class="caps muted">記録した時間</div><div class="value material">${nfmt(s.mins)}<span>分</span></div><div class="desc">「分」で記録した実績</div></div><div class="kpi"><div class="caps muted">直近7日間</div><div class="value material">${weekly.rate===null?'—':weekly.rate+'%'} </div><div class="desc">実行率（休息除く）</div></div></div>
+    ${window.RHYTHM_KONO?.today?.()||''}
     ${renderTodayTimeline(d)}
     <div class="grid-main"><div class="stack"><div><div class="today-section"><h2>今日の習慣</h2><span class="count">${habits.length}件</span></div>${habits.length?habits.map(h=>renderHabitCard(h,d)).join(''):blank('repeat','今日の習慣はありません','曜日や実行頻度を設定すると、ここに表示されます。','habit','習慣を登録')}</div>
     <div class="card"><div class="card-header"><span class="card-title">タスク・締切</span><button class="textbtn" data-action="new" data-kind="task">＋ タスク追加</button></div>${tasks.length?`<div class="section-list">${tasks.map(t=>renderTaskRow(t)).join('')}</div>`:blank('check','今日の期限付きタスクはありません','期限のある作業がここに表示されます。')}</div>
@@ -632,7 +675,124 @@ ${summary}
   });
   document.addEventListener('submit',event=>{if(event.target.id==='entity-form'){event.preventDefault();saveForm(event.target);}});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'&&ui.modal)closeModal();});
+  window.RHYTHM_BRIDGE = {
+    getState: () => state, commit, render, todayKey, addDays, startOfWeek, formatDate, calendarEntries, calendarDone,
+    navigateCalendar: (date) => { ui.date=date; ui.calendarMonth=date.slice(0,7); setTab('calendar'); },
+    openEvent: (date) => { ui.date=date; openModal('calendar-event',null,{date}); }
+  };
   initialize();
+})();
+
+</script>
+<script>
+/* RHYTHM 3.1 — Manager / Executor system. Inspired by Yukari Kono's publicly described methods. */
+(() => {
+  'use strict';
+  const B = window.RHYTHM_BRIDGE;
+  if (!B) return;
+  const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+  const minutes = v => /^([01]\d|2[0-3]):[0-5]\d$/.test(v||'') ? Number(v.slice(0,2))*60+Number(v.slice(3,5)) : null;
+  const today = () => B.todayKey();
+  function store() {
+    const s = B.getState().settings;
+    if(!s.kono || typeof s.kono !== 'object' || Array.isArray(s.kono))s.kono={version:1,days:{},weeks:{}};
+    if(!s.kono.days || typeof s.kono.days !== 'object')s.kono.days={};
+    if(!s.kono.weeks || typeof s.kono.weeks !== 'object')s.kono.weeks={};
+    return s.kono;
+  }
+  const day = d => store().days[d] || {};
+  const week = d => store().weeks[B.startOfWeek(d)] || {};
+  const focusEntries = d => B.calendarEntries(d).filter(x=>['学習','自己成長'].includes(x.event.category));
+  const planned = d => focusEntries(d).reduce((s,x)=>s + Math.max(0,(minutes(x.endTime)||0)-(minutes(x.startTime)||0)),0);
+  function signature(d) { return JSON.stringify(B.calendarEntries(d).map(x=>[x.event.id,x.key,x.title,x.startTime,x.endTime,x.event.category])); }
+  const isConfirmed = d => !!day(d).confirmedAt && day(d).signature === signature(d);
+  const formatMin = v => {const n=Math.max(0,Math.round(v));return n>=60?`${Math.floor(n/60)}時間${n%60?`${n%60}分`:''}`:`${n}分`;};
+  const labelDay = d => B.formatDate(d,{month:'numeric',day:'numeric',weekday:'short'});
+  function score(d) {
+    const doc=day(d),available=Number(doc.available),known=doc.available!==undefined && doc.available!=='' && Number.isFinite(available) && available>0;
+    const usable=known?clamp(available,0,1440):0;
+    const target=Math.floor(usable*2/3);
+    const load=planned(d);
+    return {known,available:usable,target,load,spare:known?Math.max(0,usable-load):0,over:known?Math.max(0,load-target):0};
+  }
+  function status(d){const doc=day(d);if(!doc.confirmedAt)return '未確定';return isConfirmed(d)?'確定済':'予定変更あり';}
+  function miniMeter(d){const s=score(d);if(!s.known)return `<p class="ko-muted">学習可能な時間を入力すると、3分の2ルールを判定できます。</p>`;
+    const pct=Math.min(100,Math.round(s.load/s.available*100));
+    return `<div class="ko-meter" aria-label="確保時間に対して学習予定${pct}%"><span style="width:${pct}%"></span></div><div class="ko-small">計画 ${formatMin(s.load)} ／ 目安 ${formatMin(s.target)} ／ 予備 ${formatMin(s.spare)} ${s.over?`<strong class="ko-warn">（目安を${formatMin(s.over)}超過）</strong>`:'<span class="ko-good">余裕あり</span>'}</div>`;
+  }
+  function todayPanel(){
+    const d=today(),doc=day(d),next=B.addDays(d,1),s=score(d);
+    const done=B.calendarEntries(d).filter(x=>['学習','自己成長'].includes(x.event.category) && B.calendarDone(x)).length;
+    const total=focusEntries(d).length;
+    return `<section class="ko-card ko-hero" aria-label="自動行動システム"><div class="ko-heading"><div><div class="ko-kicker">EXECUTOR MODE / 河野式 自動行動システム</div><h2>今日は、決めたことを実行する。</h2></div><span class="ko-pill ${isConfirmed(d)?'ko-ok':''}">${status(d)}</span></div>
+      <div class="ko-two"><div><div class="ko-label">今日の成果目標</div><div class="ko-aim">${esc(doc.outcome||'カレンダーで今日の成果目標を決めよう')}</div><p class="ko-muted">${doc.cue?`開始トリガー：${esc(doc.cue)}`:'行動のきっかけを前夜に決める'}</p><p class="ko-muted">${doc.minimum?`最低ライン：${esc(doc.minimum)}`:'無理な日は「最低ライン」だけでもOK'}</p></div><div class="ko-progress"><div class="ko-kicker">FOCUS BLOCKS</div><div class="ko-large">${done}<span> / ${total}</span></div><div class="ko-muted">学習・自己成長の予定の完了</div></div></div>
+      ${miniMeter(d)}
+      <div class="ko-actions"><button class="btn sm primary" data-kono-action="tomorrow">${esc(labelDay(next))}の予定を決める</button><button class="btn sm outline" data-kono-action="goto" data-date="${d}">今日の計画を修正</button><button class="btn sm" data-kono-action="week">週間計画</button></div>
+      <details class="ko-review"><summary>マネージャー視点で、今日を分析する</summary><form id="ko-review-form" class="ko-fields" data-date="${d}"><label>実際にできた成果<input name="result" maxlength="300" placeholder="例：FAR 20問中16問正解" value="${esc(doc.result||'')}"></label><label>妨げになった原因<select name="blocker"><option value="">選択してください</option>${['時間の見積もり','疲労・睡眠','スマホ・通知','開始のきっかけ不足','作業が大きすぎる','予定変更','集中できる場所','その他','特になし'].map(v=>`<option ${v===doc.blocker?'selected':''}>${v}</option>`).join('')}</select></label><label>明日変える仕組み<input name="adjustment" maxlength="300" placeholder="例：帰宅後スマホを別室に置く" value="${esc(doc.adjustment||'')}"></label><button class="btn sm primary" type="submit">振り返りを保存</button></form></details>
+      <div class="ko-next">翌日の計画：<strong>${status(next)}</strong>。${isConfirmed(next)?'明日は予定を見て実行するだけ。':'寝る前に明日の開始時刻・成果・余白を決めよう。'}</div>
+    </section>`;
+  }
+  function weekPanel(d){
+    const start=B.startOfWeek(d),w=week(d),days=Array.from({length:7},(_,i)=>B.addDays(start,i));
+    const ready=days.filter(isConfirmed).length;
+    return `<section class="ko-card" aria-label="週間マネージャー"><div class="ko-heading"><div><div class="ko-kicker">MANAGER MODE / WEEKLY DESIGN</div><h2>今週の設計 <span class="ko-small">${esc(labelDay(start))}〜</span></h2></div><span class="ko-pill">${ready}/7日 確定</span></div><form id="ko-week-form" data-week="${start}" class="ko-week-form"><label>今週の最優先テーマ<input name="theme" maxlength="120" value="${esc(w.theme||'')}" placeholder="例：FARのリース会計を完成"></label><label>日曜日に確認する成果指標<input name="metric" maxlength="120" value="${esc(w.metric||'')}" placeholder="例：問題80問・正答率80%以上"></label><button class="btn sm primary" type="submit">週間目標を保存</button></form>
+      <div class="ko-weekdays">${days.map(x=>{const p=score(x);return `<button type="button" class="ko-daychip ${x===d?'ko-selected':''}" data-kono-action="goto" data-date="${x}"><strong>${esc(labelDay(x))}</strong><span>${status(x)}</span><small>${p.known?`${formatMin(p.load)} / ${formatMin(p.target)}`:'時間未設定'}</small></button>`;}).join('')}</div>
+      <p class="ko-muted">日曜に1週間を作成 → 毎晩、翌日を確定 → 当日は実行だけ。予定を変えた日は再確認が必要です。</p></section>`;
+  }
+  function dayPanel(d){
+    const doc=day(d),s=score(d),entries=B.calendarEntries(d),late=minutes(doc.cutoff||'22:00');
+    const last=entries.reduce((m,x)=>Math.max(m,minutes(x.endTime)||0),0);
+    const beyond=last>late;
+    return `<section class="ko-card" aria-label="前夜のプランナー"><div class="ko-heading"><div><div class="ko-kicker">NIGHT BEFORE / DAILY DESIGN</div><h2>${esc(labelDay(d))} の実行計画</h2></div><span class="ko-pill ${isConfirmed(d)?'ko-ok':''}">${status(d)}</span></div>
+      <form id="ko-day-form" class="ko-fields" data-date="${d}"><div class="ko-2cols"><label>学習・自己成長に使える時間（分）<input name="available" type="number" min="0" max="1440" step="5" placeholder="例：180" value="${esc(doc.available??'')}"></label><label>活動を終える時刻<input type="time" name="cutoff" value="${esc(doc.cutoff||'22:00')}"></label></div>
+      ${miniMeter(d)}
+      <label>その日に達成する成果（何を、どこまで）<input name="outcome" maxlength="200" placeholder="例：FARの収益認識を20問解き、間違いを整理する" value="${esc(doc.outcome||'')}"></label>
+      <label>開始トリガー（いつ・どこで始める）<input name="cue" maxlength="160" placeholder="例：帰宅後の夕食が終わったら机に座る" value="${esc(doc.cue||'')}"></label>
+      <label>疲れた日の最低ライン<input name="minimum" maxlength="160" placeholder="例：間違い問題を3問だけ解く" value="${esc(doc.minimum||'')}"></label>
+      ${beyond?`<p class="ko-warn">登録済みの予定が終了時刻を過ぎています（最後の予定 ${String(Math.floor(last/60)).padStart(2,'0')}:${String(last%60).padStart(2,'0')}）。</p>`:''}
+      <label class="ko-check"><input name="confirmed" type="checkbox" ${isConfirmed(d)?'checked':''}> この日の予定を確認し、実行計画を確定する</label>
+      <div class="ko-actions"><button class="btn sm primary" type="submit">${isConfirmed(d)?'予定を更新・再確定':'実行計画を保存'}</button><button class="btn sm outline" type="button" data-kono-action="new-event" data-date="${d}">時間付き予定を追加</button></div></form>
+      ${!entries.length?'<p class="ko-muted">カレンダーに時間付き予定がありません。タスクを予定に変えると、開始の迷いを減らせます。</p>':''}
+      <p class="ko-muted">3分の2ルールの判定は「学習・自己成長」カテゴリの時間付き予定を対象とします。仕事・移動・食事などを除いた、勉強に使える時間を入力してください。</p></section>`;
+  }
+  function calendarPanel(d){return `<div class="ko-dashboard">${weekPanel(d)}${dayPanel(d)}</div>`;}
+  window.RHYTHM_KONO={today:todayPanel,calendar:calendarPanel};
+  document.addEventListener('click',e=>{const el=e.target.closest('[data-kono-action]');if(!el)return;const a=el.dataset.konoAction;
+    if(a==='tomorrow')B.navigateCalendar(B.addDays(today(),1));
+    if(a==='week')B.navigateCalendar(B.startOfWeek(today()));
+    if(a==='goto')B.navigateCalendar(el.dataset.date);
+    if(a==='new-event')B.openEvent(el.dataset.date);
+  });
+  document.addEventListener('submit',e=>{
+    const form=e.target;
+    if(!['ko-day-form','ko-week-form','ko-review-form'].includes(form.id))return;
+    e.preventDefault();
+    const fd=new FormData(form), get=n=>String(fd.get(n)||'').trim(),db=store();
+    if(form.id==='ko-week-form'){
+      const key=form.dataset.week;db.weeks[key]={theme:get('theme').slice(0,120),metric:get('metric').slice(0,120),updatedAt:new Date().toISOString()};
+    } else {
+      const key=form.dataset.date,prev=day(key),record={...prev};
+      if(form.id==='ko-day-form'){
+        const raw=get('available');
+        if(raw!=='' && (!Number.isFinite(Number(raw)) || Number(raw)<0 || Number(raw)>1440)){alert('学習に使える時間は0〜1440分で入力してください。');return;}
+        if(minutes(get('cutoff'))===null){alert('終了時刻を確認してください。');return;}
+        Object.assign(record,{available:raw===''?'':Number(raw),cutoff:get('cutoff'),outcome:get('outcome').slice(0,200),cue:get('cue').slice(0,160),minimum:get('minimum').slice(0,160)});
+        if(fd.has('confirmed')){
+          if(!record.outcome){alert('「達成する成果」を入力してから確定してください。');return;}
+          if(!B.calendarEntries(key).length){alert('先に時間付きの予定を1件以上登録してください。');return;}
+          record.confirmedAt=new Date().toISOString();record.signature=signature(key);
+        } else {record.confirmedAt='';record.signature='';}
+      } else {
+        Object.assign(record,{result:get('result').slice(0,300),blocker:get('blocker'),adjustment:get('adjustment').slice(0,300)});
+      }
+      record.updatedAt=new Date().toISOString();db.days[key]=record;
+    }
+    B.commit();
+  });
+  // If the core initialized before this file was loaded, repaint without touching data.
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>B.render(),{once:true});
+  else B.render();
 })();
 
 </script>
